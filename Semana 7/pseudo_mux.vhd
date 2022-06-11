@@ -36,7 +36,7 @@ begin
                 when inputD =>
                 	NEXT_STATE <= inputA;
 			end case;
-		elsif(rising_edge(CLOCK)) then
+		elsif(falling_edge(CLOCK) or rising_edge(CLOCK)) then
         	case THIS_STATE is
             	when inputA =>
                 	Q <= A;
