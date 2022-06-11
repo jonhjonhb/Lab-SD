@@ -1,0 +1,71 @@
+1) O que é um FPGA?
+Dispositivo de circuito integrado.
+
+2) Para que serve um FPGA?
+Implementar quaisquer circuitos digitais.
+
+3) Quais partes compõem um FPGA?
+Blocos lógicos programáveis, DSP, BRAM.
+
+4) Qual o objetivo de cada parte de um FPGA?
+Elementos lógicos (LUT, FFD, MUX, permite implementar qualquer tipo de circuito lógico, Combinacional ou Sequencial)
+DSP (dispositivo capaz de somar e fazer outras operações, MAC Multiplicador Acumulador e Contador),
+BRAM (Armazenamento de acesso aleatório).
+
+5) Como programar um FPGA?
+Usar uma ferramenta computacional (Intel FPGA - Intel® Quartus® Prime Lite Edition 19.1)
+
+6) Quais partes compõem o kit Altera DE2 – Therasic?
+• DE2 board 
+• Cabo USB para programação e controle do FPGA 
+• CD-ROM com a documentação do DE2 
+• CD-ROMs containing Altera’s Quartus® II Web Edition and the Nios® II Embedded Design 
+Suit Evaluation Edition software. 
+• Bag of six rubber (silicon) covers for the DE2 board stands. The bag also contains some 
+extender pins, which can be used to facilitate easier probing with testing equipment of the 
+board’s I/O expansion headers 
+• Clear plastic cover for the board 
+• 9V DC wall-mount power supply 
+
+7) Quais partes do kit Altera DE2 – Therasic são usadas para gravação e depuração de sistemas digitais?
+
+A configuração da interface USB do computador para a programação do FPGA via JTAG é realizada no 
+computador na qual o kit FPGA será conectado. A maioria dos kits atuais já tem a interface USB-Blaster 
+e o procedimento de configuração é o descrito no procedimento de configuração da USB para programação do FPGA via JTAG.
+
+
+1. Programação JTAG: Neste método de programação, nomeado após os padrões IEEE Joint
+Test Action Group, o fluxo de bits de configuração é baixado diretamente no Cyclone II
+FPGA. O FPGA manterá esta configuração enquanto a alimentação for aplicada à placa;
+a configuração é perdida quando a energia é desligada.
+2. Programação AS: Neste método, chamado de programação serial ativa, o bit de configuração
+fluxo é baixado no chip EEPROM serial Altera EPCS16. Ele fornece
+armazenamento não volátil do fluxo de bits, para que a informação seja retida mesmo quando o
+alimentação da placa DE2 está desligada. Quando a alimentação da placa é ligada, o
+dados de configuração no dispositivo EPCS16 são carregados automaticamente no Cyclone II
+FPGA.
+
+
+1) Cite dois fabricantes de dispositivos FPGAs:
+Altera e Xilinx.
+
+2) Cite as partes que compõem um kit de desenvolvimento DE0 Nano:
+Altera DE0-Nano Board
+USB Mini-B Cable
+DE0-Nano Quick Start Guide
+
+3) Qual a família de dispositivos FPGAs e qual o código do dispositivo FPGA usado no kit DE0 Nano?
+Cyclone, EP4CE22F17C6N.
+
+4) Quais partes e quantas de cada existe no dispositivo FPGA usado no kit DE0 Nano?
+22,320 Logic elements (LEs)
+594 Embedded memory (Kbits)
+66 Embedded 18 x 18 multipliers
+4 General-purpose PLLs
+153 Maximum FPGA I/O pins 
+https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=139&No=593&PartNo=2#contents
+
+5) O que se grava em um dispositivo FPGA?
+
+
+6) Como o dispositivo FPGA usado no kit DE0 Nano é gravado?

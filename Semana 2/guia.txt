@@ -1,0 +1,16 @@
+1) Quais são as etapas do projeto de um sistema digital usando um FPGA?
+  (1) Especificação e entrada do projeto.
+  (2) Síntese e mapeamento da tecnologia.
+  (3) Posicionamento e roteamento.
+  (4) Verificação e teste.
+  (5) Programação do FPGA.
+
+2) Para que serve a ferramenta Quartus II WebEdition?
+
+3) Para que serve a ferramenta ModelSim?
+
+4) O que significa síntese de um sistema digital?
+
+5) O que é uma simulação funcional?
+
+6) Quais as condições mínimas necessárias para realização de uma simulação funcional?

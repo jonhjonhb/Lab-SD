@@ -1,0 +1,20 @@
+-- Simple MUX gate design
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity mux_gate is
+port(
+  a: in std_logic;
+  b: in std_logic;
+  sel: in std_logic;
+  s: out std_logic);
+end mux_gate;
+
+architecture rtl of mux_gate is
+begin
+	if sel = '0' then
+    	s <= a;
+    else
+    	s <= b;
+    end if;
+end rtl;

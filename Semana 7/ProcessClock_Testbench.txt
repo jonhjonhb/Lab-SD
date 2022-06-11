@@ -1,0 +1,19 @@
+   -- Clock period definitions
+   constant PERIOD     : time := 20 ns;
+   constant DUTY_CYCLE : real := 0.5;
+   constant OFFSET     : time := 5 ns;
+
+
+------------------------------------------------------------------------------------
+----------------- process para gerar o sinal de clock ------------------------------
+------------------------------------------------------------------------------------		
+        PROCESS    -- clock process for clock
+        BEGIN
+            WAIT for OFFSET;
+            CLOCK_LOOP : LOOP
+                CLOCK_50MHz <= '0';
+                WAIT FOR (PERIOD - (PERIOD * DUTY_CYCLE));
+                CLOCK_50MHz <= '1';
+                WAIT FOR (PERIOD * DUTY_CYCLE);
+            END LOOP CLOCK_LOOP;
+        END PROCESS;
