@@ -16,39 +16,52 @@ type state_type is (inputA, inputB, inputC, inputD);
 signal lastSState : std_logic := '0';
 begin
 	processo_checagem: process(CLOCK)
-    begin
-    	if(rising_edge(CLOCK)) then
-           	THIS_STATE <= NEXT_STATE;
-            lastSState <= S;
+  begin
+    if(rising_edge(CLOCK)) then
+          THIS_STATE <= NEXT_STATE;
+          lastSState <= S;
+      end if;
+  end process processo_checagem;
+  processo_computacional1: process(CLOCK, THIS_STATE, lastSState, S)
+  begin
+    case THIS_STATE is
+      when inputA =>
+        if((S = '1') and (lastSState = '0')) then
+          NEXT_STATE <= inputB;
+        else
+          NEXT_STATE <= inputA;
         end if;
-    end process processo_checagem;
-
+      when inputB =>
+        if((S = '1') and (lastSState = '0')) then
+          NEXT_STATE <= inputC;
+        else
+          NEXT_STATE <= inputB;
+        end if;
+      when inputC =>
+        if((S = '1') and (lastSState = '0')) then
+          NEXT_STATE <= inputD;
+        else
+          NEXT_STATE <= inputC;
+        end if;
+      when inputD =>
+        if((S = '1') and (lastSState = '0')) then
+          NEXT_STATE <= inputA;
+        else
+          NEXT_STATE <= inputD;
+        end if;
+      end case;
+    end process processo_computacional1;
     processo_computacional: process(CLOCK, THIS_STATE, lastSState, S)
     begin
-    	if((S = '1') and (lastSState = '0')) then
-            case THIS_STATE is
-            	when inputA =>
-                	NEXT_STATE <= inputB;
-                when inputB =>
-                	NEXT_STATE <= inputC;
-                when inputC =>
-                	NEXT_STATE <= inputD;
-                when inputD =>
-                	NEXT_STATE <= inputA;
-			end case;
-		elsif(falling_edge(CLOCK) or rising_edge(CLOCK)) then
-        	case THIS_STATE is
-            	when inputA =>
-                	Q <= A;
-                when inputB =>
-                	Q <= B;
-                when inputC =>
-                	Q <= C;
-                when inputD =>
-                	Q <= D;
-			end case;
-		end if;
-    end process processo_computacional;
-		
-    
+    	case THIS_STATE is
+        when inputA =>
+          Q <= A;
+        when inputB =>
+          Q <= B;
+        when inputC =>
+          Q <= C;
+        when inputD =>
+          Q <= D;
+      end case;
+    end process processo_computacional;    
 end arch;
