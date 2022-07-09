@@ -103,7 +103,7 @@ entity EEPROM is
 	);
 	port (
 		clk 	: in std_logic
-		we 		: in std_logic
+		wr 		: in std_logic
 		addr 	: in std_logic_vector (ADDR_LENGHT - 1 downto 0);
 		datain 	: in std_logic_vector (R_LENGHT - 1 downto 0);
 		dataout : out std_logic_vector (R_LENGHT - 1 downto 0);
@@ -120,7 +120,7 @@ architecture ROM_REGISTER of EEPROM is
 	begin
 		if (rising_edge(clk)) then
 			loc := to_integer(unsigned(addr));
-			if (we = '1') then
+			if (wr = '1') then
 				rom_s(loc) <= datain;
 			end if;
 			dataout <= ram_s(loc);
