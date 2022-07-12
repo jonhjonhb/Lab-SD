@@ -14,7 +14,7 @@ entity EEPROM is
 		wr 		: in 	std_logic
 		addr 	: in 	std_logic_vector (ADDR_LENGHT - 1 downto 0);
 		datain 	: in 	std_logic_vector (R_LENGHT - 1 downto 0);
-		dataout : out 	std_logic_vector (R_LENGHT - 1 downto 0);
+		dataout : out 	std_logic_vector (R_LENGHT - 1 downto 0)
 	);
 end entity;
 
