@@ -1,0 +1,42 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+entity DataPath is
+    port (
+           x_in : in std_logic_vector(15 downto 0);
+			  vec_out : out std_logic_vector(15 downto 0);
+           s_out: out std_logic
+        );
+end DataPath;
+
+architecture RTL2 OF DataPath is
+
+component comparador16bits is
+    port (
+				A:IN STD_LOGIC_VECTOR(0 to 15); -- primeira entrada
+				B:IN STD_LOGIC_VECTOR(0 to 15); -- segunda entrada
+				GT:OUT STD_LOGIC					 -- saída A > B 
+        );
+end component;
+
+component multiplicador is
+	port 
+	(
+		entrada	   : in std_logic_vector (15 downto 0);
+		entrada2	   : in std_logic_vector (15 downto 0);
+		resultado  : out std_logic_vector (15 downto 0)
+	);
+end component;
+
+signal aux1: std_logic_vector(15 downto 0) := x"0003";
+signal aux2: std_logic_vector(15 downto 0);
+signal aux3: std_logic_vector(15 downto 0) := x"000B";
+
+begin
+multiplicador1 : multiplicador 		 port map (entrada=>x_in, entrada2=>aux1, resultado=>aux2);
+vec_out <= aux2;
+comparador1    : comparador16bits    port map (A=>aux2, B=>aux3, GT=>s_out);
+--x3 : full_adder port map (Cin=> aux2, x=>x_in(2), y=>y_in(2), s=>s_out(2), Cout=>aux3);
+--x4 : full_adder port map (Cin=> aux3, x=>x_in(3), y=>y_in(3), s=>s_out(3), Cout=>C_out);
+
+end RTL2 ;

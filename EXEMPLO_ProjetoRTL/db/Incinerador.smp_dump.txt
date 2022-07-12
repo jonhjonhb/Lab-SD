@@ -1,0 +1,22 @@
+
+State Machine - |Incinerador|Controladora:B_Controladora|estado_atual
+Name estado_atual.S18 estado_atual.S17 estado_atual.S16 estado_atual.S15 estado_atual.S14 estado_atual.S13 estado_atual.S12 estado_atual.S11 estado_atual.S10 estado_atual.S9 estado_atual.S8 estado_atual.S7 estado_atual.S6 estado_atual.S5 estado_atual.S4 estado_atual.S3 estado_atual.S2 estado_atual.S1 estado_atual.S0 
+estado_atual.S0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+estado_atual.S1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+estado_atual.S2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+estado_atual.S3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+estado_atual.S4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+estado_atual.S5 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+estado_atual.S6 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+estado_atual.S7 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+estado_atual.S8 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+estado_atual.S9 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+estado_atual.S10 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S11 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S12 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S13 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S14 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S15 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S16 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S17 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_atual.S18 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 

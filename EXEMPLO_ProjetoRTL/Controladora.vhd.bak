@@ -1,0 +1,31 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Controladora is
+	port 
+	(
+		AgtB	   : in std_logic;
+		HELP  : out std_logic := '0'
+	);
+
+end entity;
+
+architecture comportamento2 of Controladora is
+signal state :  std_logic_vector(4 downto 0) := "00000";
+begin
+ 
+  process(AgtB)
+    begin
+        if (state="00000") and (AgtB = '1')  then
+							HELP <= '1';
+							state <= "00001";
+		  elsif (state="00001") and (AgtB = '0') then
+							HELP <= '0';
+							state <= "00000";
+		  end if;
+          
+    end process;
+ 
+end comportamento2;
+
