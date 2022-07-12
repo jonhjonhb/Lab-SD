@@ -5,11 +5,11 @@ use ieee.std_logic_1164.all;
 entity registrador8bits is
 	generic (n : natural := 8);
 	port (
-		entrada	: in std_logic_vector(n-1 downto 1);
-		clk 	: in std_logic;
-		rst 	: in std_logic;
-		load 	: in std_logic;
-		saida 	: out std_logic_vector(n-1 downto 1)
+		entrada	: in 	std_logic_vector(n-1 downto 1);
+		clk 	: in 	std_logic;
+		rst 	: in 	std_logic;
+		load 	: in 	std_logic;
+		saida 	: out 	std_logic_vector(n-1 downto 1)
 	);
 end entity registrador8bits;
 

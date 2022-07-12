@@ -4,9 +4,9 @@ use ieee.std_logic_1164.all;
 -- FLIP FLOP RS
 entity flip_flop_rs is
 	port (
-		clk : in std_logic;
-		set : in std_logic;
-		rst : in std_logic;
+		clk : 	in std_logic;
+		set : 	in std_logic;
+		rst : 	in std_logic;
 		saida : out std_logic;
 	);
 end entity flip_flop_rs;
