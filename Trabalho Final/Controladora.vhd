@@ -34,8 +34,9 @@ entity Controladora is
 		display_price : out std_logic_vector(15 downto 0);
 		display_money : out std_logic_vector(15 downto 0);
 		return_value : out std_logic_vector(15 downto 0);
-		dispense_product : out std_logic_vector(2 downto 0);
+		return_all : out std_logic;
 		COIN_LOCK : out std_logic;
+		dispense_product : out std_logic_vector(2 downto 0);
  		);
 
 end entity;
@@ -70,26 +71,27 @@ begin
 		SLC,
 		estado_atual)
  begin
-				MEM_data_input <='00000000';
 				MEM_wr <='0';
-				REG_MONEY_ld <='0';
-				REG_MONEY_clr <='0';
-				RTRN_REG_ld <='0';
-				RTNR_REG_clr <='0';
-				SLC_PRODUCT_ld <='0';
-				SLC_PRODUCT_clr <='0';
+				COIN_LOCK <='0';
 				RELEASE_ld <='0';
+				RTRN_REG_ld <='0';
 				RELEASE_clr <='0';
+				return_all <= '0';
+				REG_MONEY_ld <='0';
+				RTNR_REG_clr <='0';
+				REG_MONEY_clr <='0';
+				SLC_PRODUCT_ld <='0';
 				MANUT_STATE_ld <='0';
-				MANUT_STATE_clr <='0';
-				display_price <= '0000000000000000';
-				REG_MONEY_lt_mem <='0';
 				in_manutenance <='0';
+				SLC_PRODUCT_clr <='0';
+				MANUT_STATE_clr <='0';
+				REG_MONEY_lt_mem <='0';
+				dispense_product <= '000';
+				MEM_data_input <='00000000';
+				display_price <= '0000000000000000';
 				display_price <= '0000000000000000';
 				display_money <= '0000000000000000';
 				return_value <= '0000000000000000';
-				dispense_product <= '000';
-				COIN_LOCK <='0';
 	case estado_atual is 
 			when S0 =>
 				--Idle
@@ -101,6 +103,8 @@ begin
 				COIN_LOCK <= '0';
 				SLC_PRODUCT <= '00';
 				REG_MONEY <= '00000000';
+				SLC_PRODUCT_clr <= '1';
+				return_all <= '0';
 				proximo_estado <= S1;
 				if ( SensorDeInsercao = '1' and ChavedeManutencao = '0') then
 					proximo_estado <= S1;
@@ -113,9 +117,11 @@ begin
 				end if;
 			when S1 =>
 				-- Soma dinheiro inserido
+				REG_MONEY_ld <= '1';
 				proximo_estado <= S3;
 			when S2 =>
 				-- Selecionar Produto
+				SLC_PRODUCT_clr <= '0';
 				SLC_PRODUCT_ld <= '1';
 				if ( ChavedeManutencao = '1' ) then
 					proximo_estado <= S4;
@@ -124,6 +130,9 @@ begin
 				end if;
 			when S3=>
 				-- Wait
+				COIN_LOCK <= '0';
+				REG_MONEY_ld <= '0';
+				SLC_PRODUCT_ld <= '0';
 				if ( FinalizarEscolha = '0' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
 					proximo_estado <= S3;
 				elsif ( BotaoDeSelecao = '1' and FinalizarEscolha = '0' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
@@ -143,7 +152,9 @@ begin
 				end if;
 			when S4 =>
 				-- Manutenção
+				MEM_wr <= '0';
 				COIN_LOCK <= '1';
+				SLC_PRODUCT_ld <= '0';
 				ProximoProduto <= '0'; -- É possivel isso? 
 				if ( ChavedeManutencao = '1' and BotaoDeSelecao = '0') then
 					proximo_estado <= S4;
@@ -164,14 +175,20 @@ begin
 				-- Dispensa produto 
 				-- atribui troco
 				-- dispense_product = SLC_PRODUCT;
+				return_all <= '0';
+				RTRN_REG_ld <= '1';
 				proximo_estado <= S8;
 			when S7 =>
 				-- Não dispensa produto
 				-- coloca o dinheiro no troco
+				return_all <= '1';
+				RTRN_REG_ld <= '1';
 				proximo_estado <= S8; 
-			when S8 =>
+				when S8 =>
 				--Dispensa Troco
-				REG_MONEY_lt_mem <= '1';
+				-- REG_MONEY_lt_mem <= '1';
+				RTRN_REG_ld <= '0';
+				RTNR_REG_clr <='1';
 				proximo_estado <= S0;
 		end case;
 	end process;
