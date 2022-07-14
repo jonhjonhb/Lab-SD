@@ -1,20 +1,20 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity mux2X1 is
-	generic (n : natural := 16);
-	port (
-		CurrentChange	: in std_logic_vector(n-1 downto 0);
-		CurrentMoney	: in std_logic_vector(n-1 downto 0);
-		ChaveRetorno	: in std_logic;
-		ReturnValue		: out std_logic_vector(n-1 downto 0)
+ENTITY mux2X1 IS
+	GENERIC (n : NATURAL := 16);
+	PORT (
+		CurrentChange : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+		CurrentMoney : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+		ChaveRetorno : IN STD_LOGIC;
+		ReturnValue : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
 	);
-end entity;
+END ENTITY;
 
-architecture rtl of mux2X1 is
-begin
-	with ChaveRetorno select
-		ReturnValue <= 	CurrentMoney 	when '1',
-						CurrentChange	when others;
-end rtl;
+ARCHITECTURE rtl OF mux2X1 IS
+BEGIN
+	WITH ChaveRetorno SELECT
+		ReturnValue <= CurrentMoney WHEN '1',
+		CurrentChange WHEN OTHERS;
+END rtl;

@@ -1,44 +1,44 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity tb_flip_flop_rs is
-end tb_flip_flop_rs;
+ENTITY tb_flip_flop_rs IS
+END tb_flip_flop_rs;
 
-architecture testeflip_flop_rs of tb_flip_flop_rs is
+ARCHITECTURE testeflip_flop_rs OF tb_flip_flop_rs IS
 
-component flip_flop_rs is
-	port (
-		clk : 	in std_logic;
-		set : 	in std_logic;
-		rst : 	in std_logic;
-		saida : out std_logic
-	);
-end component;
+	COMPONENT flip_flop_rs IS
+		PORT (
+			clk : IN STD_LOGIC;
+			set : IN STD_LOGIC;
+			rst : IN STD_LOGIC;
+			saida : OUT STD_LOGIC
+		);
+	END COMPONENT;
 
-signal CLK_50MHz : std_logic := '0';
-signal SET, RST : std_logic := '0';
-signal SAIDA: std_logic := '0';
--- Clock period definitions
-constant PERIOD     : time := 10 ns;
-constant DUTY_CYCLE : real := 0.5;
-constant OFFSET     : time := 5 ns;
+	SIGNAL CLK_50MHz : STD_LOGIC := '0';
+	SIGNAL SET, RST : STD_LOGIC := '0';
+	SIGNAL SAIDA : STD_LOGIC := '0';
+	-- Clock period definitions
+	CONSTANT PERIOD : TIME := 10 ns;
+	CONSTANT DUTY_CYCLE : real := 0.5;
+	CONSTANT OFFSET : TIME := 5 ns;
 
-begin
-instancia_Flip_flop_rs: flip_flop_rs port map(clk=>CLK_50MHz,set=>SET,rst=>RST,saida=>SAIDA);
+BEGIN
+	instancia_Flip_flop_rs : flip_flop_rs PORT MAP(clk => CLK_50MHz, set => SET, rst => RST, saida => SAIDA);
 
-	clock_manager: process    -- clock process for clock
-	begin
-		wait for OFFSET;
-		CLOCK_LOOP : loop
+	clock_manager : PROCESS -- clock process for clock
+	BEGIN
+		WAIT FOR OFFSET;
+		CLOCK_LOOP : LOOP
 			CLK_50MHz <= '0';
-			wait for (PERIOD - (PERIOD * DUTY_CYCLE));
+			WAIT FOR (PERIOD - (PERIOD * DUTY_CYCLE));
 			CLK_50MHz <= '1';
-			wait for (PERIOD * DUTY_CYCLE);
-		end loop CLOCK_LOOP;
-	end process clock_manager;
+			WAIT FOR (PERIOD * DUTY_CYCLE);
+		END LOOP CLOCK_LOOP;
+	END PROCESS clock_manager;
 
-	SET <= '1', '0' after 50 ns, '1' after 150 ns;
-	RST <= '1', '1' after 50 ns, '0' after 100 ns;
+	SET <= '1', '0' AFTER 50 ns, '1' AFTER 150 ns;
+	RST <= '1', '1' AFTER 50 ns, '0' AFTER 100 ns;
 
-end testeflip_flop_rs;
+END testeflip_flop_rs;

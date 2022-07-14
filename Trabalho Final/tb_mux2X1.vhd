@@ -1,31 +1,32 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity tb_mux2X1 is
-end tb_mux2X1;
+ENTITY tb_mux2X1 IS
+END tb_mux2X1;
 
-architecture testeMux of tb_mux2X1 is
+ARCHITECTURE testeMux OF tb_mux2X1 IS
 
-component mux2X1 is
-	generic (n : natural := 16);
-	port (
-		CurrentChange	: in std_logic_vector(n-1 downto 0);
-		CurrentMoney	: in std_logic_vector(n-1 downto 0);
-		ChaveRetorno	: in std_logic;
-		ReturnValue		: out std_logic_vector(n-1 downto 0)
-	);
-end component;
+	COMPONENT mux2X1 IS
+		GENERIC (n : NATURAL := 16);
+		PORT (
+			CurrentChange : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+			CurrentMoney : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+			ChaveRetorno : IN STD_LOGIC;
+			ReturnValue : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
+		);
+	END COMPONENT;
 
-signal CC, CM, RV: std_logic_vector(15 downto 0);
-signal CR: std_logic := '0';
+	SIGNAL CC, CM, RV : STD_LOGIC_VECTOR(15 DOWNTO 0);
+	SIGNAL CR : STD_LOGIC := '0';
 
-begin
-instancia_Mux2X1: mux2X1 port map(CurrentChange=>CC,CurrentMoney=>CM,
-																		ReturnValue=>RV,ChaveRetorno=>CR);
+BEGIN
+	instancia_Mux2X1 : mux2X1 PORT MAP(
+		CurrentChange => CC, CurrentMoney => CM,
+		ReturnValue => RV, ChaveRetorno => CR);
 
-CC <= x"0000", x"0020" after 50 ns, x"0080" after 100 ns;
-CM <= x"0000", x"0025" after 50 ns, x"0350" after 100 ns;
-CR <= not(CR) after 25 ns;
+	CC <= x"0000", x"0020" AFTER 50 ns, x"0080" AFTER 100 ns;
+	CM <= x"0000", x"0025" AFTER 50 ns, x"0350" AFTER 100 ns;
+	CR <= NOT(CR) AFTER 25 ns;
 
-end testeMux;
+END testeMux;
