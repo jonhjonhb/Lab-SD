@@ -18,7 +18,7 @@ ENTITY Controladora IS
 		REG_MONEY_ld : OUT STD_LOGIC;
 		REG_MONEY_clr : OUT STD_LOGIC;
 		RTRN_REG_ld : OUT STD_LOGIC;
-		RTNR_REG_clr : OUT STD_LOGIC;
+		RTRN_REG_clr : OUT STD_LOGIC;
 		SLC_PRODUCT_ld : OUT STD_LOGIC;
 		SLC_PRODUCT_clr : OUT STD_LOGIC;
 		RELEASE_ld : OUT STD_LOGIC;
@@ -63,7 +63,7 @@ BEGIN
 		REG_MONEY_ld <= '0';
 		REG_MONEY_clr <= '0';
 		RTRN_REG_ld <= '0';
-		RTNR_REG_clr <= '0';
+		RTRN_REG_clr <= '0';
 		SLC_PRODUCT_ld <= '0';
 		SLC_PRODUCT_clr <= '0';
 		RELEASE_ld <= '0';
@@ -86,7 +86,7 @@ BEGIN
 				RELEASE_ld <= '0';
 				MANUT_STATE_set <= '0';
 				REG_MONEY_clr <= '1';
-				RTNR_REG_clr <= '1';
+				RTRN_REG_clr <= '1';
 				SLC_PRODUCT_clr <= '1';
 				RELEASE_clr <= '1';
 				MANUT_STATE_clr <= '1';
@@ -101,7 +101,7 @@ BEGIN
 				-- Soma dinheiro inserido
 				REG_MONEY_ld <= '1';
 				REG_MONEY_clr <= '0';
-				RTNR_REG_clr <= '0';
+				RTRN_REG_clr <= '0';
 				SLC_PRODUCT_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
@@ -111,7 +111,7 @@ BEGIN
 				SLC_PRODUCT_ld <= '1';
 				SLC_PRODUCT_clr <= '0';
 				REG_MONEY_clr <= '0';
-				RTNR_REG_clr <= '0';
+				RTRN_REG_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
 				IF (ChavedeManutencao = '1') THEN
@@ -143,7 +143,7 @@ BEGIN
 				MEM_wr <= '0';
 				SLC_PRODUCT_ld <= '0';
 				REG_MONEY_clr <= '0';
-				RTNR_REG_clr <= '0';
+				RTRN_REG_clr <= '0';
 				SLC_PRODUCT_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';

@@ -61,7 +61,6 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			BotaoDeSelecao : in std_logic;
 			FinalizarEscolha : in std_logic;
 			ProximoProduto : in std_logic;
-			Resetar : in std_logic;
 			REG_MONEY_lt_mem : in std_logic;
 			ClkRegEstados : in std_logic;
 			ClrRegEstados : in std_logic;
@@ -113,7 +112,28 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 		);
 		
 		BLOCK_CONTROLADORA : Controladora port map(
-
+			ClkRegEstados => CLOCK_UNIVERSAL,
+			ClrRegEstados => RESET,
+			SensorDeInsercao => InsertionSensor,
+			ChavedeManutencao => ManutenanceKey,
+			BotaoDeSelecao => SelectionButton,
+			FinalizarEscolha => FinishProcess,
+			ProximoProduto => NextProduct,
+			REG_MONEY_lt_mem => caboDC1,
+			MEM_wr => caboCD1,
+			REG_MONEY_ld => caboCD2,
+			REG_MONEY_clr => caboCD3,
+			RTRN_REG_ld => caboCD4,
+			RTRN_REG_clr => caboCD5,
+			SLC_PRODUCT_ld => caboCD6,
+			SLC_PRODUCT_clr => caboCD7,
+			RELEASE_ld => caboCD8,
+			RELEASE_clr => caboCD9,
+			MANUT_STATE_set => caboCD10,
+			MANUT_STATE_clr => caboCD11,
+			return_all => caboCD12,
+			dispense_money => ,
+			dispense_product => 
 		);
 
 end RTLMaquinaDeVendas;
