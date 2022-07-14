@@ -9,9 +9,9 @@ ARCHITECTURE testeEEPROM OF tb_EEPROM IS
 
 	COMPONENT EEPROM IS
 		GENERIC (
-			ADDR_LENGHT : NATURAL := 4;
-			R_LENGHT : NATURAL := 8;
-			NUM_OF_REGS : NATURAL := 16
+			ADDR_LENGHT : NATURAL := 5;
+			R_LENGHT : NATURAL := 16;
+			NUM_OF_REGS : NATURAL := 32
 		);
 		PORT (
 			clk : IN STD_LOGIC;
@@ -24,8 +24,8 @@ ARCHITECTURE testeEEPROM OF tb_EEPROM IS
 
 	SIGNAL CLK_50MHz : STD_LOGIC := '0';
 	SIGNAL WR : STD_LOGIC := '0';
-	SIGNAL ADDR : STD_LOGIC_VECTOR (3 DOWNTO 0);
-	SIGNAL DATAIN, DATAOUT : STD_LOGIC_VECTOR (7 DOWNTO 0);
+	SIGNAL ADDR : STD_LOGIC_VECTOR (4 DOWNTO 0);
+	SIGNAL DATAIN, DATAOUT : STD_LOGIC_VECTOR (15 DOWNTO 0);
 	-- Clock period definitions
 	CONSTANT PERIOD : TIME := 10 ns;
 	CONSTANT DUTY_CYCLE : real := 0.5;
@@ -48,17 +48,17 @@ BEGIN
 	END PROCESS clock_manager;
 
 	WR <= '1', '1' AFTER 50 ns, '0' AFTER 100 ns, '0' AFTER 200 ns;
-	ADDR <= STD_LOGIC_VECTOR(to_unsigned(0, 4)),
-		STD_LOGIC_VECTOR(to_unsigned(1, 4)) AFTER 25 ns,
-		STD_LOGIC_VECTOR(to_unsigned(2, 4)) AFTER 50 ns,
-		STD_LOGIC_VECTOR(to_unsigned(3, 4)) AFTER 75 ns,
-		STD_LOGIC_VECTOR(to_unsigned(0, 4)) AFTER 100 ns,
-		STD_LOGIC_VECTOR(to_unsigned(1, 4)) AFTER 125 ns,
-		STD_LOGIC_VECTOR(to_unsigned(2, 4)) AFTER 150 ns,
-		STD_LOGIC_VECTOR(to_unsigned(3, 4)) AFTER 175 ns;
-	DATAIN <= STD_LOGIC_VECTOR(to_unsigned(5, 8)),
-		STD_LOGIC_VECTOR(to_unsigned(10, 8)) AFTER 25 ns,
-		STD_LOGIC_VECTOR(to_unsigned(15, 8)) AFTER 50 ns,
-		STD_LOGIC_VECTOR(to_unsigned(20, 8)) AFTER 75 ns;
+	ADDR <= STD_LOGIC_VECTOR(to_unsigned(0, 5)),
+		STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 25 ns,
+		STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 50 ns,
+		STD_LOGIC_VECTOR(to_unsigned(3, 5)) AFTER 75 ns,
+		STD_LOGIC_VECTOR(to_unsigned(0, 5)) AFTER 100 ns,
+		STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 125 ns,
+		STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 150 ns,
+		STD_LOGIC_VECTOR(to_unsigned(3, 5)) AFTER 175 ns;
+	DATAIN <= STD_LOGIC_VECTOR(to_unsigned(5, 16)),
+		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 25 ns,
+		STD_LOGIC_VECTOR(to_unsigned(15, 16)) AFTER 50 ns,
+		STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 75 ns;
 
 END testeEEPROM;
