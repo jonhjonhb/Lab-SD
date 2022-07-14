@@ -128,25 +128,20 @@ architecture RTLDatapath of Datapath is
 
 	begin
 		-- Chamada dos objetos
-		A_REG_MONEY 	: registrador16bits port map (clk=>CLOCK, entrada=>caboF_A, rst=>REG_MONEY_clr, load=>REG_MONEY_ld, saida=>caboA_FGJK);
+		A_REG_MONEY 	: registrador16bits 	port map (clk=>CLOCK, entrada=>caboF_A, rst=>REG_MONEY_clr, load=>REG_MONEY_ld, saida=>caboA_FGJK);
 		display_money <= caboA_FGJK;
-
-		B_RTRN_REG 		: registrador16bits port map (clk=>CLOCK, entrada=>caboG_B, rst=>RTRN_REG_clr, load=>RTRN_REG_ld, saida=>caboB_K);
-		
-		C_RELEASE		: registrador5bits	port map (clk=>CLOCK, entrada=>caboH_C, rst=>RELEASE_clr, load=>RELEASE_ld, saida=>dispense_product_id);
-
-		D_SLC_PRODUCT	: registrador5bits	port map (clk=>CLOCK, entrada=>SLC, rst=>SLC_PRODUCT_clr, load=>SLC_PRODUCT_ld, saida=>caboD_HI);
-
-		E_MANUT_STATE	: flip_flop_rs		port map (clk=>CLOCK, set=>MANUT_STATE_set, rst=>MANUT_STATE_clr, saida=>auxE_outputs);
+		B_RTRN_REG 		: registrador16bits 	port map (clk=>CLOCK, entrada=>caboG_B, rst=>RTRN_REG_clr, load=>RTRN_REG_ld, saida=>caboB_K);
+		C_RELEASE		: registrador5bits		port map (clk=>CLOCK, entrada=>caboH_C, rst=>RELEASE_clr, load=>RELEASE_ld, saida=>dispense_product_id);
+		D_SLC_PRODUCT	: registrador5bits		port map (clk=>CLOCK, entrada=>SLC, rst=>SLC_PRODUCT_clr, load=>SLC_PRODUCT_ld, saida=>caboD_HI);
+		E_MANUT_STATE	: flip_flop_rs			port map (clk=>CLOCK, set=>MANUT_STATE_set, rst=>MANUT_STATE_clr, saida=>auxE_outputs);
 		COIN_LOCK <= auxE_outputs;
 		in_manutenance <= auxE_outputs;
-
-		F_SOMADOR		: somador16bits		port map (FirstNumber=>Cvalue, SecondNumber=>caboA_FGJK, OutputNumber=>caboF_A);
-
-		G_SUBTRATOR		: subtrator16bits	port map (FirstNumber=>caboA_FGJK, SecondNumber=>caboI_GJ, OutputNumber=>caboG_B);
-
-		H_INCREMENTADOR : incrementador5bits port map (Number=>caboD_HI, OutputNumber=>caboH_C);
-
-		I_PRICES		: EEPROM			port map (clk=>CLOCK, wr=>MEM_wr, addr=>, datain=>, dataout=> )
+		F_SOMADOR		: somador16bits			port map (FirstNumber=>Cvalue, SecondNumber=>caboA_FGJK, OutputNumber=>caboF_A);
+		G_SUBTRATOR		: subtrator16bits		port map (FirstNumber=>caboA_FGJK, SecondNumber=>caboI_GJ, OutputNumber=>caboG_B);
+		H_INCREMENTADOR : incrementador5bits 	port map (Number=>caboD_HI, OutputNumber=>caboH_C);
+		I_PRICES		: EEPROM				port map (clk=>CLOCK, wr=>MEM_wr, addr=>caboD_HI, datain=>MEM_data_input, dataout=>caboI_GJ);
+		display_price <= caboI_GJ;
+		J_COMPARADOR_LT	: comparador16bits		port map (FirstNumber=>caboA_FGJK, SecondNumber=>caboI_GJ, First_lt_Second=>REG_MONEY_lt_mem);
+		K_MULTIPLEXADOR	: mux2X1				port map (CurrentChange=>caboB_K, CurrentMoney=>caboA_FGJK, ChaveRetorno=>return_all, ReturnValue=>return_value);
 
 end RTLDataPath;
