@@ -5,11 +5,11 @@ use ieee.std_logic_1164.all;
 entity registrador16bits is
 	generic (n : natural := 16);
 	port (
-		entrada	: in 	std_logic_vector(n-1 downto 1);
+		entrada	: in 	std_logic_vector(n-1 downto 0);
 		clk 	: in 	std_logic;
 		rst 	: in 	std_logic;
 		load 	: in 	std_logic;
-		saida 	: out 	std_logic_vector(n-1 downto 1)
+		saida 	: out 	std_logic_vector(n-1 downto 0)
 	);
 end entity registrador8bits;
 
@@ -30,11 +30,11 @@ end architecture beh;
 -- entity registrador3bits is
 -- 	generic (n : natural := 3);
 -- 	port (
--- 		entrada	: in std_logic_vector(n-1 downto 1);
+-- 		entrada	: in std_logic_vector(n-1 downto 0);
 -- 		clk 	: in std_logic;
 -- 		rst 	: in std_logic;
 -- 		load 	: in std_logic;
--- 		saida 	: out std_logic_vector(n-1 downto 1)
+-- 		saida 	: out std_logic_vector(n-1 downto 0)
 -- 	);
 -- end entity registrador3bits;
 
@@ -53,11 +53,11 @@ end architecture beh;
 -- entity registrador2bits is
 -- 	generic (n : natural := 2);
 -- 	port (
--- 		entrada	: in std_logic_vector(n-1 downto 1);
+-- 		entrada	: in std_logic_vector(n-1 downto 0);
 -- 		clk 	: in std_logic;
 -- 		rst 	: in std_logic;
 -- 		load 	: in std_logic;
--- 		saida 	: out std_logic_vector(n-1 downto 1)
+-- 		saida 	: out std_logic_vector(n-1 downto 0)
 -- 	);
 -- end entity registrador2bits;
 
