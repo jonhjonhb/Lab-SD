@@ -17,7 +17,7 @@ architecture beh of registrador5bits is
 	begin
 		process (clk, rst) is
 		begin
-			if(rst = '0') then
+			if(rst = '1') then
 				saida 	<= (others => '0');
 			elsif (rising_edge(clk) and (load = '1')) then
 				saida 	<= entrada

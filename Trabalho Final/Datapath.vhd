@@ -101,4 +101,14 @@ architecture RTLDatapath of Datapath is
 		);
 	end component;
 
+	component incrementador5bits IS
+		generic (n : NATURAL := 5);
+		port (
+			Number : in STD_LOGIC_VECTOR(n - 1 downto 0);
+			OutputNumber : out STD_LOGIC_VECTOR(n - 1 downto 0)
+		);
+	end component;
+
+	signal 
+
 end RTLDataPath;
