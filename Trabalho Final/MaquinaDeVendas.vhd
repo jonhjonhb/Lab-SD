@@ -44,10 +44,10 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			MEM_wr : IN STD_LOGIC;
 			MEM_data_input : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 
-			display_money : OUT STD_LOGIC(15 DOWNTO 0);
-			display_price : OUT STD_LOGIC(15 DOWNTO 0);
-			return_value : OUT STD_LOGIC(15 DOWNTO 0);
-			dispense_product_id : OUT STD_LOGIC(4 DOWNTO 0);
+			display_money : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+			display_price : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+			return_value : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+			dispense_product_id : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
 			REG_MONEY_lt_mem : OUT STD_LOGIC;
 			COIN_LOCK : OUT STD_LOGIC;
 		);
