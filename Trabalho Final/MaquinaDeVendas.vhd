@@ -50,7 +50,6 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			dispense_product_id : OUT STD_LOGIC(4 DOWNTO 0);
 			REG_MONEY_lt_mem : OUT STD_LOGIC;
 			COIN_LOCK : OUT STD_LOGIC;
-			in_manutenance : OUT STD_LOGIC
 		);
 	END component;
 
@@ -91,6 +90,22 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 		BLOCK_DATAPATH : Datapath port map (
 			CLOCK => CLOCK_UNIVERSAL,
 			Cvalue => MONEY_VALUE,
+			MEM_data_input => PRICE_INPUT,
+			SLC => PRODUCT_SELECTOR,
+			MEM_wr => caboCD1,
+			REG_MONEY_ld => caboCD2,
+			REG_MONEY_clr => caboCD3,
+			RTRN_REG_ld => caboCD4,
+			RTRN_REG_clr => caboCD5,
+			SLC_PRODUCT_ld => caboCD6,
+			SLC_PRODUCT_clr => caboCD7,
+			RELEASE_ld => caboCD8,
+			RELEASE_clr => caboCD9,
+			MANUT_STATE_set => caboCD10,
+			MANUT_STATE_clr => caboCD11,
+			return_all => caboCD12,
+			REG_MONEY_lt_mem => caboDC1,
+
 		);
 		
 		BLOCK_CONTROLADORA : Controladora port map(
