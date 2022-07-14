@@ -11,9 +11,9 @@ entity registrador5bits is
 		load 	: in 	std_logic;
 		saida 	: out 	std_logic_vector(n-1 downto 0)
 	);
-end entity registrador8bits;
+end entity registrador5bits;
 
-architecture beh of registrador16bits is
+architecture beh of registrador5bits is
 	begin
 		process (clk, rst) is
 		begin
