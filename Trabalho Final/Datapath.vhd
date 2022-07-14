@@ -124,7 +124,7 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 	-- Cabos genéricos caboA_B são cabos que ligam A a B. Cabos cabo_A_BCD ligam A a todos B, C e D.
 	SIGNAL caboF_A, caboA_FGJK, caboB_K, caboG_B, caboI_GJ : STD_LOGIC_VECTOR(15 DOWNTO 0);
 	SIGNAL caboD_HI, caboH_C : STD_LOGIC_VECTOR(4 DOWNTO 0);
-	SIGNAL auxE_outputs;
+	SIGNAL auxE_outputs : STD_LOGIC := '0';
 
 BEGIN
 	-- Chamada dos objetos
