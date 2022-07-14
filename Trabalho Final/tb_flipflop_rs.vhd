@@ -25,22 +25,20 @@ constant DUTY_CYCLE : real := 0.5;
 constant OFFSET     : time := 5 ns;
 
 begin
-instancia_Flip_flop_rs: flip_flop_rs port map(clk=>CLK,set=>SET,rst=>RST,saida=>SAIDA);
+instancia_Flip_flop_rs: flip_flop_rs port map(clk=>CLK_50MHz,set=>SET,rst=>RST,saida=>SAIDA);
 
 	clock_manager: process    -- clock process for clock
 	begin
 		wait for OFFSET;
 		CLOCK_LOOP : loop
-			CLOCK_50MHz <= '0';
+			CLK_50MHz <= '0';
 			wait for (PERIOD - (PERIOD * DUTY_CYCLE));
-			CLOCK_50MHz <= '1';
+			CLK_50MHz <= '1';
 			wait for (PERIOD * DUTY_CYCLE);
 		end loop CLOCK_LOOP;
 	end process clock_manager;
 
-	SET <= '1', '0' after 50 ns;
-	RST <= '0', '1' after 76 ns, '0' after 150 ns;
-	SAIDA <= not(buttonPress) after 50 ns;
+	SET <= '1', '0' after 50 ns, '1' after 150 ns;
+	RST <= '1', '1' after 50 ns, '0' after 100 ns;
 
-
-end testeMux;
+end testeflip_flop_rs;
