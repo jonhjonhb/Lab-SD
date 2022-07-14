@@ -42,8 +42,9 @@ BEGIN
 	END PROCESS clock_manager;
 
 	ENT <= STD_LOGIC_VECTOR(to_unsigned(1, 16)),
-		STD_LOGIC_VECTOR(to_unsigned(5, 16)) AFTER 50 ns;
-	LOAD <= '0', '1' AFTER 50 ns, '0' AFTER 150 ns;
-	RST <= '1', '0' AFTER 50 ns;
+		STD_LOGIC_VECTOR(to_unsigned(5, 16)) AFTER 50 ns,
+		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 100 ns;
+	LOAD <= '0', '1' AFTER 50 ns, '0' AFTER 100 ns;
+	RST <= '1', '0' AFTER 50 ns, '1' AFTER 140 ns;
 
 END testeregistrador16bits;
