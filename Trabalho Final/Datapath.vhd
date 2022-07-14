@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity Datapath is
 	port (
+		CLOCK			: in std_logic;
 		return_all 		: in std_logic;
 		REG_MONEY_ld	: in std_logic;
 		REG_MONEY_clr	: in std_logic;
@@ -30,7 +31,7 @@ entity Datapath is
 end DataPath;
 
 architecture RTLDatapath of Datapath is
-
+	-- Componentes
 	component flip_flop_rs is
 		port (
 			clk : 	in std_logic;
@@ -109,6 +110,10 @@ architecture RTLDatapath of Datapath is
 		);
 	end component;
 
-	signal 
+	-- Cabos genéricos caboA_B são cabos que ligam A a B. Cabos cabo_A_BCD ligam A a todos B, C e D.
+	signal caboF_A, 
+
+	-- Chamada dos objetos
+	A_REG_MONEY : registrador16bits port map (clk=>CLOCK, );
 
 end RTLDataPath;
