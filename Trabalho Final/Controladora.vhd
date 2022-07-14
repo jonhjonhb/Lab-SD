@@ -1,181 +1,187 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity Controladora is
-    port ( 
+ENTITY Controladora IS
+	PORT (
 		--Entradas--
-		SensorDeInsercao : in std_logic;
-		ChavedeManutencao : in std_logic;
-		BotaoDeSelecao : in std_logic;
-		FinalizarEscolha : in std_logic;
-		ProximoProduto : in std_logic;
-		Resetar : in std_logic;
-		REG_MONEY_lt_mem : in std_logic;
-		ClkRegEstados : in std_logic;
-		ClrRegEstados : in std_logic;
+		SensorDeInsercao : IN STD_LOGIC;
+		ChavedeManutencao : IN STD_LOGIC;
+		BotaoDeSelecao : IN STD_LOGIC;
+		FinalizarEscolha : IN STD_LOGIC;
+		ProximoProduto : IN STD_LOGIC;
+		Resetar : IN STD_LOGIC;
+		REG_MONEY_lt_mem : IN STD_LOGIC;
+		ClkRegEstados : IN STD_LOGIC;
+		ClrRegEstados : IN STD_LOGIC;
 		--Saidas--
-		MEM_wr  : out std_logic;
-		REG_MONEY_ld  : out std_logic;
-		REG_MONEY_clr  : out std_logic;
-		RTRN_REG_ld  : out std_logic;
-		RTNR_REG_clr  : out std_logic;
-		SLC_PRODUCT_ld  : out std_logic;
-		SLC_PRODUCT_clr  : out std_logic;
-		RELEASE_ld  : out std_logic;
-		RELEASE_clr  : out std_logic;
-		MANUT_STATE_set  : out std_logic;
-		MANUT_STATE_clr  : out std_logic;
-		return_all : out std_logic;
-		dispense_money : out std_logic;
-		dispense_product : out std_logic;
- 	);
+		MEM_wr : OUT STD_LOGIC;
+		REG_MONEY_ld : OUT STD_LOGIC;
+		REG_MONEY_clr : OUT STD_LOGIC;
+		RTRN_REG_ld : OUT STD_LOGIC;
+		RTNR_REG_clr : OUT STD_LOGIC;
+		SLC_PRODUCT_ld : OUT STD_LOGIC;
+		SLC_PRODUCT_clr : OUT STD_LOGIC;
+		RELEASE_ld : OUT STD_LOGIC;
+		RELEASE_clr : OUT STD_LOGIC;
+		MANUT_STATE_set : OUT STD_LOGIC;
+		MANUT_STATE_clr : OUT STD_LOGIC;
+		return_all : OUT STD_LOGIC;
+		dispense_money : OUT STD_LOGIC;
+		dispense_product : OUT STD_LOGIC;
+	);
 
-end entity;
+END ENTITY;
 
-architecture RTLControladora of Controladora is
-type state is (S0, S1, S2, S3, S4, S5, S6, S7, S8);
-signal estado_atual, proximo_estado: state;
+ARCHITECTURE RTLControladora OF Controladora IS
+	TYPE state IS (S0, S1, S2, S3, S4, S5, S6, S7, S8);
+	SIGNAL estado_atual, proximo_estado : state;
 
-begin
+BEGIN
 
 	-- REGISTRADOR DE ESTADOS
-	process(ClrRegEstados, ClkRegEstados) is
-	begin
-		if(ClrRegEstados = '1') then
+	PROCESS (ClrRegEstados, ClkRegEstados) IS
+	BEGIN
+		IF (ClrRegEstados = '1') THEN
 			-- Sentencas sequenciais assincronas
 			estado_atual <= S0;
-		elsif(rising_edge(ClkRegEstados)) then
+		ELSIF (rising_edge(ClkRegEstados)) THEN
 			-- Sentencas sequenciais sincronas
 			estado_atual <= proximo_estado;
-		end if;
-	end process;
-	
-	
- process (SensorDeInsercao,
- 		ChavedeManutencao,
- 		BotaoDeSelecao,
- 		FinalizarEscolha,
- 		ProximoProduto,
- 		Resetar,
-		Cvalue,
-		PRICE_INPUT,
-		SLC,
-		estado_atual)
- begin
-				MEM_wr <='0';
-				return_all <= '0';
-				RELEASE_ld <='0';
-				RTRN_REG_ld <='0';
-				RELEASE_clr <='0';
-				REG_MONEY_ld <='0';
-				RTNR_REG_clr <='0';
-				REG_MONEY_clr <='0';
-				SLC_PRODUCT_ld <='0';
-				MANUT_STATE_ld <='0';
-				in_manutenance <='0';
-				SLC_PRODUCT_clr <='0';
-				MANUT_STATE_clr <='0';
+		END IF;
+	END PROCESS;
+	PROCESS (
+		SensorDeInsercao,
+		ChavedeManutencao,
+		BotaoDeSelecao,
+		FinalizarEscolha,
+		ProximoProduto,
+		Resetar,
+		REG_MONEY_lt_mem,
+		ClkRegEstados,
+		ClrRegEstados)
+	BEGIN
+		MEM_wr <= '0';
+		REG_MONEY_ld <= '0';
+		REG_MONEY_clr <= '0';
+		RTRN_REG_ld <= '0';
+		RTNR_REG_clr <= '0';
+		SLC_PRODUCT_ld <= '0';
+		SLC_PRODUCT_clr <= '0';
+		RELEASE_ld <= '0';
+		RELEASE_clr <= '0';
+		MANUT_STATE_set <= '0';
+		MANUT_STATE_clr <= '0';
+		return_all <= '0';
+		dispense_money <= '0';
+		dispense_product <= '0';
 
-	case estado_atual is 
-			when S0 =>
+		CASE estado_atual IS
+			WHEN S0 =>
 				--Idle
-				display_price <= '00000000';
-				SELEC_PRICE <= '00000000';
-				RTRN <= '0';
-				return_value <= '00000000';
-				dispense_product <= '000';
-				COIN_LOCK <= '0';
-				SLC_PRODUCT <= '00';
-				REG_MONEY <= '00000000';
-				SLC_PRODUCT_clr <= '1';
+				dispense_money <= '0';
 				return_all <= '0';
-				proximo_estado <= S1;
-				if ( SensorDeInsercao = '1' and ChavedeManutencao = '0') then
+				MEM_wr <= '0';
+				REG_MONEY_ld <= '0';
+				RTRN_REG_ld <= '0';
+				SLC_PRODUCT_ld <= '0';
+				RELEASE_ld <= '0';
+				MANUT_STATE_set <= '0';
+				REG_MONEY_clr <= '1';
+				RTNR_REG_clr <= '1';
+				SLC_PRODUCT_clr <= '1';
+				RELEASE_clr <= '1';
+				MANUT_STATE_clr <= '1';
+				IF (SensorDeInsercao = '1' AND ChavedeManutencao = '0') THEN
 					proximo_estado <= S1;
-				elsif ( BotaoDeSelecao = '1' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
+				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
-				elsif ( ChavedeManutencao = '1' and SensorDeInsercao = '0') then
+				ELSIF (ChavedeManutencao = '1' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S4;
-				else
-					proximo_estado <= S0; -- É necessário isso?
-				end if;
-			when S1 =>
+				END IF;
+			WHEN S1 =>
 				-- Soma dinheiro inserido
 				REG_MONEY_ld <= '1';
-				proximo_estado <= S3;
-			when S2 =>
-				-- Selecionar Produto
+				REG_MONEY_clr <= '0';
+				RTNR_REG_clr <= '0';
 				SLC_PRODUCT_clr <= '0';
+				RELEASE_clr <= '0';
+				MANUT_STATE_clr <= '0';
+				proximo_estado <= S3;
+			WHEN S2 =>
+				-- Selecionar Produto
 				SLC_PRODUCT_ld <= '1';
-				if ( ChavedeManutencao = '1' ) then
+				SLC_PRODUCT_clr <= '0';
+				REG_MONEY_clr <= '0';
+				RTNR_REG_clr <= '0';
+				RELEASE_clr <= '0';
+				MANUT_STATE_clr <= '0';
+				IF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
-				elsif ( ChavedeManutencao = '0' ) then
+				ELSIF (ChavedeManutencao = '0') THEN
 					proximo_estado <= S3;
-				end if;
-			when S3=>
+				END IF;
+			WHEN S3 =>
 				-- Wait
-				COIN_LOCK <= '0';
 				REG_MONEY_ld <= '0';
 				SLC_PRODUCT_ld <= '0';
-				if ( FinalizarEscolha = '0' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
-					proximo_estado <= S3;
-				elsif ( BotaoDeSelecao = '1' and FinalizarEscolha = '0' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
-					proximo_estado <= S2;
-				elsif ( SensorDeInsercao = '1' and FinalizarEscolha = '0' and ChavedeManutencao = '0') then
+
+				IF (Resetar = '1') THEN
+					proximo_estado <= S0;
+				ELSIF (SensorDeInsercao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0') THEN
 					proximo_estado <= S1;
-				elsif ( Resetar = '1') then
-					proximo_estado <= S0;
-				elsif ( FinalizarEscolha = '1' and ChavedeManutencao = '1' and SensorDeInsercao = '0') then
-					proximo_estado <= S5;
-				elsif ( FinalizarEscolha = '1' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
-					proximo_estado <= S6; -- Dinheiro suficiente
-					-- Colocar condição para verificar o dinheiro
-				elsif ( FinalizarEscolha = '1' and ChavedeManutencao = '0' and SensorDeInsercao = '0') then
-					proximo_estado <= S7; -- Dinheiro insuficiente
-					-- Colocar condição para verificar o dinheiro
-				end if;
-			when S4 =>
-				-- Manutenção
-				MEM_wr <= '0';
-				COIN_LOCK <= '1';
-				SLC_PRODUCT_ld <= '0';
-				ProximoProduto <= '0'; -- É possivel isso? 
-				if ( ChavedeManutencao = '1' and BotaoDeSelecao = '0') then
-					proximo_estado <= S4;
-				elsif ( BotaoDeSelecao = '1' and ChavedeManutencao = '1' ) then
+				ELSIF (BotaoDeSelecao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
-				elseif ( ChavedeManutencao = '0' ) then
+				ELSIF (FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+					proximo_estado <= S3;
+				ELSIF (ChavedeManutencao = '1') THEN
+					proximo_estado <= S4;
+				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+					proximo_estado <= S6;
+				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+					proximo_estado <= S7;
+				END IF;
+			WHEN S4 =>
+				-- Manutenção
+				MANUT_STATE_set <= '1';
+				MEM_wr <= '0';
+				SLC_PRODUCT_ld <= '0';
+				REG_MONEY_clr <= '0';
+				RTNR_REG_clr <= '0';
+				SLC_PRODUCT_clr <= '0';
+				RELEASE_clr <= '0';
+				MANUT_STATE_clr <= '0';
+				IF (ChavedeManutencao = '1' AND BotaoDeSelecao = '0' AND FinalizarEscolha = '0') THEN
+					proximo_estado <= S4;
+				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '1') THEN
+					proximo_estado <= S2;
+				ELSIF (ChavedeManutencao = '0') THEN
 					proximo_estado <= S0;
-				end if;
-			when S5 =>
+				ELSIF (ChavedeManutencao = '1' AND FinalizarEscolha = '1') THEN
+					proximo_estado <= S5;
+				END IF;
+			WHEN S5 =>
 				-- Edita preço do input
 				MEM_wr <= '1';
-				if ( ProximoProduto = '0' ) then
+				IF (ProximoProduto = '0') THEN
 					proximo_estado <= S5;
-				elsif ( ProximoProduto = '1' ) then
+				ELSIF (ProximoProduto = '1') THEN
 					proximo_estado <= S4;
-				end if;
-			when S6 =>
+				END IF;
+			WHEN S6 =>
 				-- Dispensa produto 
-				-- atribui troco
-				-- dispense_product = SLC_PRODUCT;
-				return_all <= '0';
 				RTRN_REG_ld <= '1';
+				RELEASE_ld <= '1';
 				proximo_estado <= S8;
-			when S7 =>
+			WHEN S7 =>
 				-- Não dispensa produto
-				-- coloca o dinheiro no troco
 				return_all <= '1';
-				RTRN_REG_ld <= '1';
-				proximo_estado <= S8; 
-				when S8 =>
+				proximo_estado <= S8;
+			WHEN S8 =>
 				--Dispensa Troco
-				-- REG_MONEY_lt_mem <= '1';
-				RTRN_REG_ld <= '0';
-				RTNR_REG_clr <='1';
+				dispense_money <= '1';
+				dispense_product <= '1';
 				proximo_estado <= S0;
-		end case;
-	end process;
---	-- Declaracoes
-end RTLControladora;
+		END CASE;
+	END PROCESS;
+END RTLControladora;
