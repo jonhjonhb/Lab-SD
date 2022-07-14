@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 -- REGISTRADOR DE 5 BITS
-entity registrador4bits is
+entity registrador5bits is
 	generic (n : natural := 5);
 	port (
 		entrada	: in 	std_logic_vector(n-1 downto 0);
