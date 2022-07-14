@@ -7,7 +7,7 @@ entity mux2X1 is
 		CurrentChange	: in std_logic_vector(15 downto 0);
 		CurrentMoney	: in std_logic_vector(15 downto 0);
 		ChaveRetorno	: in std_logic;
-		ReturnValue		: in std_logic_vector(15 downto 0)
+		ReturnValue		: out std_logic_vector(15 downto 0)
 	);
 end entity;
 
