@@ -1,37 +1,37 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
 -- MEMÓRIA EEPROM
-entity EEPROM is
-	generic (
-		ADDR_LENGHT	: natural := 4;
-		R_LENGHT	: natural := 8;
-		NUM_OF_REGS	: natural := 16
+ENTITY EEPROM IS
+	GENERIC (
+		ADDR_LENGHT : NATURAL := 4;
+		R_LENGHT : NATURAL := 8;
+		NUM_OF_REGS : NATURAL := 16
 	);
-	port (
-		clk 	: in 	std_logic
-		wr 		: in 	std_logic
-		addr 	: in 	std_logic_vector (ADDR_LENGHT - 1 downto 0);
-		datain 	: in 	std_logic_vector (R_LENGHT - 1 downto 0);
-		dataout : out 	std_logic_vector (R_LENGHT - 1 downto 0)
+	PORT (
+		clk : IN STD_LOGIC;
+		wr : IN STD_LOGIC;
+		addr : IN STD_LOGIC_VECTOR (ADDR_LENGHT - 1 DOWNTO 0);
+		datain : IN STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0);
+		dataout : OUT STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0)
 	);
-end entity;
+END ENTITY;
 
-architecture ROM_REGISTER of EEPROM is
-	type rom_reg is array (0 to NUM_OF_REGS - 1) of
-			std_logic_vector (R_LENGHT - 1 downto 0);
-	signal rom_s : rom_reg;
+ARCHITECTURE ROM_REGISTER OF EEPROM IS
+	TYPE rom_reg IS ARRAY (0 TO NUM_OF_REGS - 1) OF
+	STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0);
+	SIGNAL rom_s : rom_reg;
 
-	process(clk)
-	variable loc : integer;
-	begin
-		if (rising_edge(clk)) then
+	PROCESS (clk)
+		VARIABLE loc : INTEGER;
+	BEGIN
+		IF (rising_edge(clk)) THEN
 			loc := to_integer(unsigned(addr));
-			if (wr = '1') then
+			IF (wr = '1') THEN
 				rom_s(loc) <= datain;
-			end if;
+			END IF;
 			dataout <= ram_s(loc);
-		end if;
-	end process;
-end architecture ROM_REGISTER;
+		END IF;
+	END PROCESS;
+END ARCHITECTURE ROM_REGISTER;
