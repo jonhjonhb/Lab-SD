@@ -64,11 +64,10 @@ begin
 		estado_atual)
  begin
 				MEM_wr <='0';
-				COIN_LOCK <='0';
+				return_all <= '0';
 				RELEASE_ld <='0';
 				RTRN_REG_ld <='0';
 				RELEASE_clr <='0';
-				return_all <= '0';
 				REG_MONEY_ld <='0';
 				RTNR_REG_clr <='0';
 				REG_MONEY_clr <='0';
@@ -77,13 +76,7 @@ begin
 				in_manutenance <='0';
 				SLC_PRODUCT_clr <='0';
 				MANUT_STATE_clr <='0';
-				REG_MONEY_lt_mem <='0';
-				dispense_product <= '000';
-				MEM_data_input <='00000000';
-				display_price <= '0000000000000000';
-				display_price <= '0000000000000000';
-				display_money <= '0000000000000000';
-				return_value <= '0000000000000000';
+
 	case estado_atual is 
 			when S0 =>
 				--Idle
