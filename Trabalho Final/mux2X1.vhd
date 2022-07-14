@@ -14,6 +14,6 @@ end entity;
 architecture rtl of mux2X1 is
 begin
 	with ChaveRetorno select
-		ReturnValue <= 	CurrentChange 	when '1',
-						CurrentMoney	when others;
+		ReturnValue <= 	CurrentMoney 	when '1',
+						CurrentChange	when others;
 end rtl;
