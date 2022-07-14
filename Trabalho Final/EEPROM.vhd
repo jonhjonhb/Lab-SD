@@ -23,15 +23,16 @@ architecture ROM_REGISTER of EEPROM is
 			std_logic_vector (R_LENGHT - 1 downto 0);
 	signal rom_s : rom_reg;
 
-	process(clk)
-	variable loc : integer;
 	begin
-		if (rising_edge(clk)) then
-			loc := to_integer(unsigned(addr));
-			if (wr = '1') then
-				rom_s(loc) <= datain;
+		process(clk)
+		variable loc : integer;
+		begin
+			if (rising_edge(clk)) then
+				loc := to_integer(unsigned(addr));
+				if (wr = '1') then
+					rom_s(loc) <= datain;
+				end if;
+				dataout <= ram_s(loc);
 			end if;
-			dataout <= ram_s(loc);
-		end if;
-	end process;
+		end process;
 end architecture ROM_REGISTER;
