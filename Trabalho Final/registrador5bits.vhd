@@ -1,26 +1,26 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
 -- REGISTRADOR DE 5 BITS
-entity registrador5bits is
-	generic (n : natural := 5);
-	port (
-		entrada	: in 	std_logic_vector(n-1 downto 0);
-		clk 	: in 	std_logic;
-		rst 	: in 	std_logic;
-		load 	: in 	std_logic;
-		saida 	: out 	std_logic_vector(n-1 downto 0)
+ENTITY registrador5bits IS
+	GENERIC (n : NATURAL := 5);
+	PORT (
+		entrada : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+		clk : IN STD_LOGIC;
+		rst : IN STD_LOGIC;
+		load : IN STD_LOGIC;
+		saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
 	);
-end entity registrador5bits;
+END ENTITY registrador5bits;
 
-architecture beh of registrador5bits is
-	begin
-		process (clk, rst) is
-		begin
-			if(rst = '1') then
-				saida 	<= (others => '0');
-			elsif (rising_edge(clk) and (load = '1')) then
-				saida 	<= entrada
-			end if;
-		end process;
-end architecture beh;
+ARCHITECTURE beh OF registrador5bits IS
+BEGIN
+	PROCESS (clk, rst) IS
+	BEGIN
+		IF (rst = '1') THEN
+			saida <= (OTHERS => '0');
+		ELSIF (rising_edge(clk) AND (load = '1')) THEN
+			saida <= entrada
+			END IF;
+		END PROCESS;
+	END ARCHITECTURE beh;

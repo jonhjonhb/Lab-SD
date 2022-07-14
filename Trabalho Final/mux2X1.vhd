@@ -3,11 +3,12 @@ USE IEEE.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
 ENTITY mux2X1 IS
+	GENERIC (n : NATURAL := 16);
 	PORT (
-		CurrentChange : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		CurrentMoney : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		CurrentChange : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+		CurrentMoney : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
 		ChaveRetorno : IN STD_LOGIC;
-		ReturnValue : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		ReturnValue : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
 	);
 END ENTITY;
 
