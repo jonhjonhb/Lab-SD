@@ -1,24 +1,24 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
 -- FLIP FLOP RS
-entity flip_flop_rs is
-	port (
-		clk : 	in std_logic;
-		set : 	in std_logic;
-		rst : 	in std_logic;
-		saida : out std_logic
+ENTITY flip_flop_rs IS
+	PORT (
+		clk : IN STD_LOGIC;
+		set : IN STD_LOGIC;
+		rst : IN STD_LOGIC;
+		saida : OUT STD_LOGIC
 	);
-end entity flip_flop_rs;
+END ENTITY flip_flop_rs;
 
-architecture flip of flip_flop_rs is
-	begin
-		process (clk, rst) is
-		begin
-			if(rst = '0') then
-				saida <= '0';
-			elsif (rising_edge(clk) and (set = '1')) then
-				saida <= '1';
-			end if;
-		end process;
-end architecture flip;
+ARCHITECTURE flip OF flip_flop_rs IS
+BEGIN
+	PROCESS (clk, rst) IS
+	BEGIN
+		IF (rst = '0') THEN
+			saida <= '0';
+		ELSIF (rising_edge(clk) AND (set = '1')) THEN
+			saida <= '1';
+		END IF;
+	END PROCESS;
+END ARCHITECTURE flip;
