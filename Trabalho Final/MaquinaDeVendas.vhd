@@ -105,7 +105,11 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			MANUT_STATE_clr => caboCD11,
 			return_all => caboCD12,
 			REG_MONEY_lt_mem => caboDC1,
-
+			display_money => CURRENT_MONEY,
+			display_price => PRODUCT_PRICE,
+			return_value => MONEY_TO_RETURN,
+			dispense_product_id => DISPENSE_PRODUCT_ID,
+			COIN_LOCK => LOCK_MECHANISM
 		);
 		
 		BLOCK_CONTROLADORA : Controladora port map(

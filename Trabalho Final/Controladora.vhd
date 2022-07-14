@@ -10,7 +10,6 @@ ENTITY Controladora IS
 		BotaoDeSelecao : IN STD_LOGIC;
 		FinalizarEscolha : IN STD_LOGIC;
 		ProximoProduto : IN STD_LOGIC;
-		Resetar : IN STD_LOGIC;
 		REG_MONEY_lt_mem : IN STD_LOGIC;
 		ClkRegEstados : IN STD_LOGIC;
 		ClrRegEstados : IN STD_LOGIC;
@@ -56,7 +55,6 @@ BEGIN
 		BotaoDeSelecao,
 		FinalizarEscolha,
 		ProximoProduto,
-		Resetar,
 		REG_MONEY_lt_mem,
 		ClkRegEstados,
 		ClrRegEstados)
@@ -126,9 +124,7 @@ BEGIN
 				REG_MONEY_ld <= '0';
 				SLC_PRODUCT_ld <= '0';
 
-				IF (Resetar = '1') THEN
-					proximo_estado <= S0;
-				ELSIF (SensorDeInsercao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0') THEN
+				IF (SensorDeInsercao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0') THEN
 					proximo_estado <= S1;
 				ELSIF (BotaoDeSelecao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
