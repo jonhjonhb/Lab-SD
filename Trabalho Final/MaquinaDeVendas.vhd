@@ -20,7 +20,7 @@ entity MaquinaDeVendas is
 		DISPENSE_PRODUCT_ID : out std_logic_vector(4 downto 0);
 		LOCK_MECHANISM : out std_logic;
 		DISPENSE_MONEY : out std_logic;
-		DISPENSE_PRODUCT : out std_logic;
+		DISPENSE_PRODUCT : out std_logic
 	);
 end MaquinaDeVendas;
 
@@ -49,7 +49,7 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			return_value : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 			dispense_product_id : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
 			REG_MONEY_lt_mem : OUT STD_LOGIC;
-			COIN_LOCK : OUT STD_LOGIC;
+			COIN_LOCK : OUT STD_LOGIC
 		);
 	END component;
 
@@ -69,7 +69,7 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			REG_MONEY_ld  : out std_logic;
 			REG_MONEY_clr  : out std_logic;
 			RTRN_REG_ld  : out std_logic;
-			RTNR_REG_clr  : out std_logic;
+			RTRN_REG_clr  : out std_logic;
 			SLC_PRODUCT_ld  : out std_logic;
 			SLC_PRODUCT_clr  : out std_logic;
 			RELEASE_ld  : out std_logic;
@@ -78,7 +78,7 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			MANUT_STATE_clr  : out std_logic;
 			return_all : out std_logic;
 			dispense_money : out std_logic;
-			dispense_product : out std_logic;
+			dispense_product : out std_logic
 		);
 	end component;
 

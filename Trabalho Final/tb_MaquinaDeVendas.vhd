@@ -26,7 +26,7 @@ ARCHITECTURE testeMaquinaDeVendas OF tb_MaquinaDeVendas IS
 			DISPENSE_PRODUCT_ID : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
 			LOCK_MECHANISM : OUT STD_LOGIC;
 			DISPENSE_MONEY : OUT STD_LOGIC;
-			DISPENSE_PRODUCT : OUT STD_LOGIC;
+			DISPENSE_PRODUCT : OUT STD_LOGIC
 		);
 	END COMPONENT;
 
@@ -63,19 +63,19 @@ BEGIN
 		END LOOP CLOCK_LOOP;
 	END PROCESS clock_manager;
 
-	MONEY_VALUE <= STD_LOGIC_VECTOR(to_unsigned(10, 16)),
+	money_value <= STD_LOGIC_VECTOR(to_unsigned(10, 16)),
 		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 50 ns,
 		STD_LOGIC_VECTOR(to_unsigned(40, 16)) AFTER 100 ns,
 		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 200 ns;
-	PRICE_INPUT <= STD_LOGIC_VECTOR(to_unsigned(0, 16));
+	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16));
 
-	PRODUCT_SELECTOR <= STD_LOGIC_VECTOR(to_unsigned(2, 5));
+	product_selector <= STD_LOGIC_VECTOR(to_unsigned(2, 5));
 
-	InsertionSensor <= '1', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	ManutenanceKey <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	FinishProcess <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	SelectionButton <= '0', '1' AFTER 50 ns, '0' AFTER 100 ns;
-	NextProduct <= '0', '0' AFTER 50 ns, '1' AFTER 100 ns;
-	RESET <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
+	insertion <= '1', '0' AFTER 50 ns, '0' AFTER 100 ns;
+	manutenancao <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
+	finish_all <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
+	selection <= '0', '1' AFTER 50 ns, '0' AFTER 100 ns;
+	next_p <= '0', '0' AFTER 50 ns, '1' AFTER 100 ns;
+	reset <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
 
 END testeMaquinaDeVendas;
