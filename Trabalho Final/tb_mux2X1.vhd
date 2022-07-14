@@ -17,14 +17,14 @@ component mux2X1 is
 end component;
 
 signal CC, CM, RV: std_logic_vector(15 downto 0);
-signal CR: std_logic;
+signal CR: std_logic := '0';
 
 begin
-instancia_Mux2X1: tb_mux2X1 port map(CurrentChange=>CC,CurrentMoney=>CM,
+instancia_Mux2X1: mux2X1 port map(CurrentChange=>CC,CurrentMoney=>CM,
 																		ReturnValue=>RV,ChaveRetorno=>CR);
 
-CC <= x"0000", x"20" after 100 ns, x"80" after 200 ns;
-CM <= x"0000", x"25" after 100 ns, x"350" after 200 ns;
-CR <= '0', '1' after 100 ns, '0' after 150 ns, '1' after 200 ns;
+CC <= x"0000", x"0020" after 50 ns, x"0080" after 100 ns;
+CM <= x"0000", x"0025" after 50 ns, x"0350" after 100 ns;
+CR <= not(CR) after 25 ns;
 
 end testeMux;
