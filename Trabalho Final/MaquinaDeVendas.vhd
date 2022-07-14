@@ -108,8 +108,7 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			display_price => PRODUCT_PRICE,
 			return_value => MONEY_TO_RETURN,
 			dispense_product_id => DISPENSE_PRODUCT_ID,
-			COIN_LOCK => LOCK_MECHANISM
-		);
+			COIN_LOCK => LOCK_MECHANISM);
 		
 		BLOCK_CONTROLADORA : Controladora port map(
 			ClkRegEstados => CLOCK_UNIVERSAL,
@@ -132,8 +131,7 @@ architecture RTLMaquinaDeVendas of MaquinaDeVendas is
 			MANUT_STATE_set => caboCD10,
 			MANUT_STATE_clr => caboCD11,
 			return_all => caboCD12,
-			dispense_money => ,
-			dispense_product => 
-		);
+			dispense_money => DISPENSE_MONEY,
+			dispense_product => DISPENSE_PRODUCT);
 
 end RTLMaquinaDeVendas;
