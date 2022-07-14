@@ -13,8 +13,8 @@ entity Datapath is
 		RELEASE_ld		: in std_logic;
 		RELEASE_clr		: in std_logic;
 		SLC_PRODUCT_ld	: in std_logic;
-		SLC_PRODUCT_ld	: in std_logic;
-		SLC				: in std_logic_vector(15 downto 0);
+		SLC_PRODUCT_clr	: in std_logic;
+		SLC				: in std_logic_vector(4 downto 0);
 		MANUT_STATE_set	: in std_logic;
 		MANUT_STATE_clr	: in std_logic;
 		MEM_wr			: in std_logic;
@@ -76,6 +76,17 @@ architecture RTLDatapath of Datapath is
 		);
 	end component;
 
+	component registrador5bits is
+		generic (n : natural := 5);
+		port (
+			entrada	: in 	std_logic_vector(n-1 downto 0);
+			clk 	: in 	std_logic;
+			rst 	: in 	std_logic;
+			load 	: in 	std_logic;
+			saida 	: out 	std_logic_vector(n-1 downto 0)
+		);
+	end component;
+
 	component somador16bits is
 		generic (n : natural := 16);
 		port (
@@ -111,9 +122,31 @@ architecture RTLDatapath of Datapath is
 	end component;
 
 	-- Cabos genéricos caboA_B são cabos que ligam A a B. Cabos cabo_A_BCD ligam A a todos B, C e D.
-	signal caboF_A, 
+	signal caboF_A, caboA_FGJK, caboB_K, caboG_B, caboI_GJ : std_logic_vector(15 downto 0);
+	signal caboD_HI, caboH_C : std_logic_vector(4 downto 0);
+	signal auxE_outputs;
 
-	-- Chamada dos objetos
-	A_REG_MONEY : registrador16bits port map (clk=>CLOCK, );
+	begin
+		-- Chamada dos objetos
+		A_REG_MONEY 	: registrador16bits port map (clk=>CLOCK, entrada=>caboF_A, rst=>REG_MONEY_clr, load=>REG_MONEY_ld, saida=>caboA_FGJK);
+		display_money <= caboA_FGJK;
+
+		B_RTRN_REG 		: registrador16bits port map (clk=>CLOCK, entrada=>caboG_B, rst=>RTRN_REG_clr, load=>RTRN_REG_ld, saida=>caboB_K);
+		
+		C_RELEASE		: registrador5bits	port map (clk=>CLOCK, entrada=>caboH_C, rst=>RELEASE_clr, load=>RELEASE_ld, saida=>dispense_product_id);
+
+		D_SLC_PRODUCT	: registrador5bits	port map (clk=>CLOCK, entrada=>SLC, rst=>SLC_PRODUCT_clr, load=>SLC_PRODUCT_ld, saida=>caboD_HI);
+
+		E_MANUT_STATE	: flip_flop_rs		port map (clk=>CLOCK, set=>MANUT_STATE_set, rst=>MANUT_STATE_clr, saida=>auxE_outputs);
+		COIN_LOCK <= auxE_outputs;
+		in_manutenance <= auxE_outputs;
+
+		F_SOMADOR		: somador16bits		port map (FirstNumber=>Cvalue, SecondNumber=>caboA_FGJK, OutputNumber=>caboF_A);
+
+		G_SUBTRATOR		: subtrator16bits	port map (FirstNumber=>caboA_FGJK, SecondNumber=>caboI_GJ, OutputNumber=>caboG_B);
+
+		H_INCREMENTADOR : incrementador5bits port map (Number=>caboD_HI, OutputNumber=>caboH_C);
+
+		I_PRICES		: EEPROM			port map (clk=>CLOCK, wr=>MEM_wr, addr=>, datain=>, dataout=> )
 
 end RTLDataPath;
