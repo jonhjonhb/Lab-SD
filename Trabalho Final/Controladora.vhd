@@ -3,8 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Controladora is
-    port 
-    ( 
+    port ( 
 		--Entradas--
 		SensorDeInsercao : in std_logic;
 		ChavedeManutencao : in std_logic;
@@ -12,11 +11,10 @@ entity Controladora is
 		FinalizarEscolha : in std_logic;
 		ProximoProduto : in std_logic;
 		Resetar : in std_logic;
-		Cvalue : in std_logic_vector(15 downto 0);
-		PRICE_INPUT : in std_logic_vector(7 downto 0);
-		SLC : in std_logic_vector(3 downto 0);
+		REG_MONEY_lt_mem : in std_logic;
+		ClkRegEstados : in std_logic;
+		ClrRegEstados : in std_logic;
 		--Saidas--
-		MEM_data_input : out std_logic_vector(7 downto 0);
 		MEM_wr  : out std_logic;
 		REG_MONEY_ld  : out std_logic;
 		REG_MONEY_clr  : out std_logic;
@@ -26,18 +24,12 @@ entity Controladora is
 		SLC_PRODUCT_clr  : out std_logic;
 		RELEASE_ld  : out std_logic;
 		RELEASE_clr  : out std_logic;
-		MANUT_STATE_ld  : out std_logic;
+		MANUT_STATE_set  : out std_logic;
 		MANUT_STATE_clr  : out std_logic;
-		display_price : out std_logic_vector(15 downto 0);
-		REG_MONEY_lt_mem : out std_logic;
-		in_manutenance : out std_logic;
-		display_price : out std_logic_vector(15 downto 0);
-		display_money : out std_logic_vector(15 downto 0);
-		return_value : out std_logic_vector(15 downto 0);
 		return_all : out std_logic;
-		COIN_LOCK : out std_logic;
-		dispense_product : out std_logic_vector(2 downto 0);
- 		);
+		dispense_money : out std_logic;
+		dispense_product : out std_logic;
+ 	);
 
 end entity;
 
@@ -48,7 +40,7 @@ signal estado_atual, proximo_estado: state;
 begin
 
 	-- REGISTRADOR DE ESTADOS
-	process(ClrRegEstados, ClkRegEstados) is	
+	process(ClrRegEstados, ClkRegEstados) is
 	begin
 		if(ClrRegEstados = '1') then
 			-- Sentencas sequenciais assincronas
