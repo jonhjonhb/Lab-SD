@@ -14,8 +14,8 @@ ARCHITECTURE testeEEPROM OF tb_EEPROM IS
 			NUM_OF_REGS : NATURAL := 16
 		);
 		PORT (
-			clk : IN STD_LOGIC
-			wr : IN STD_LOGIC
+			clk : IN STD_LOGIC;
+			wr : IN STD_LOGIC;
 			addr : IN STD_LOGIC_VECTOR (ADDR_LENGHT - 1 DOWNTO 0);
 			datain : IN STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0);
 			dataout : OUT STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0)
@@ -32,7 +32,8 @@ ARCHITECTURE testeEEPROM OF tb_EEPROM IS
 	CONSTANT OFFSET : TIME := 5 ns;
 
 BEGIN
-	instancia_EEPROM : EEPROM PORT MAP(clk => CLK_50MHz, wr => WR, 
+	instancia_EEPROM : EEPROM PORT MAP(
+		clk => CLK_50MHz, wr => WR,
 		addr => ADDR, datain => DATAIN, dataout => DATAOUT);
 
 	clock_manager : PROCESS -- clock process for clock
@@ -46,15 +47,18 @@ BEGIN
 		END LOOP CLOCK_LOOP;
 	END PROCESS clock_manager;
 
-	WR <= '1', '1' AFTER 50 ns, '0' AFTER 100 ns;
+	WR <= '1', '1' AFTER 50 ns, '0' AFTER 100 ns, '0' AFTER 200 ns;
 	ADDR <= STD_LOGIC_VECTOR(to_unsigned(0, 4)),
 		STD_LOGIC_VECTOR(to_unsigned(1, 4)) AFTER 25 ns,
 		STD_LOGIC_VECTOR(to_unsigned(2, 4)) AFTER 50 ns,
-		STD_LOGIC_VECTOR(to_unsigned(3, 4)) AFTER 75 ns;
+		STD_LOGIC_VECTOR(to_unsigned(3, 4)) AFTER 75 ns,
+		STD_LOGIC_VECTOR(to_unsigned(0, 4)) AFTER 100 ns,
+		STD_LOGIC_VECTOR(to_unsigned(1, 4)) AFTER 125 ns,
+		STD_LOGIC_VECTOR(to_unsigned(2, 4)) AFTER 150 ns,
+		STD_LOGIC_VECTOR(to_unsigned(3, 4)) AFTER 175 ns;
 	DATAIN <= STD_LOGIC_VECTOR(to_unsigned(5, 8)),
 		STD_LOGIC_VECTOR(to_unsigned(10, 8)) AFTER 25 ns,
 		STD_LOGIC_VECTOR(to_unsigned(15, 8)) AFTER 50 ns,
 		STD_LOGIC_VECTOR(to_unsigned(20, 8)) AFTER 75 ns;
-	
 
 END testeEEPROM;
