@@ -5,9 +5,9 @@ use ieee.numeric_std.all;
 entity subtrator16bits is
 	generic (n : natural := 16);
 	port (
-		FirstNumber		: in std_logic_vector(n-1 downto 1);
-		SecondNumber	: in std_logic_vector(n-1 downto 1);
-		OutputNumber	: out std_logic_vector(n-1 downto 1)
+		FirstNumber		: in std_logic_vector(n-1 downto 0);
+		SecondNumber	: in std_logic_vector(n-1 downto 0);
+		OutputNumber	: out std_logic_vector(n-1 downto 0)
 	);
 end entity;
 
