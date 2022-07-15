@@ -182,7 +182,7 @@ BEGIN
 			WHEN S9 =>
 				--Tranca de inserção momentânea
 				REG_MONEY_ld <= '0';
-				IF (BotaoDeSelecao = '1') THEN
+				IF (SensorDeInsercao = '1') THEN
 					proximo_estado <= S9;
 				ELSE
 					proximo_estado <= S3;
