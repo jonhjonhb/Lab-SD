@@ -20,8 +20,8 @@ END ENTITY;
 
 ARCHITECTURE ROM_REGISTER OF EEPROM IS
 	TYPE rom_reg IS ARRAY (0 TO NUM_OF_REGS - 1) OF
-	STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0) := (others => '0');
-	SIGNAL rom_s : rom_reg;
+	STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0);
+	SIGNAL rom_s : rom_reg := (others=>(others=>'0'));;
 
 BEGIN
 	PROCESS (clk)
