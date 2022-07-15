@@ -33,7 +33,7 @@ ENTITY Controladora IS
 END ENTITY;
 
 ARCHITECTURE RTLControladora OF Controladora IS
-	TYPE state IS (S0, S1, S2, S3, S4, S5, S6, S7, S8);
+	TYPE state IS (S0, S1, S2, S3, S4, S5, S6, S7, S8, S9);
 	SIGNAL estado_atual, proximo_estado : state;
 
 BEGIN
@@ -107,7 +107,7 @@ BEGIN
 				SLC_PRODUCT_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
-				proximo_estado <= S3;
+				proximo_estado <= S9;
 			WHEN S2 =>
 				-- Selecionar Produto
 				SLC_PRODUCT_ld <= '1';
@@ -179,6 +179,13 @@ BEGIN
 				dispense_money <= '1';
 				dispense_product <= '1';
 				proximo_estado <= S0;
+			WHEN S9 =>
+				--Tranca de inserção momentânea
+				IF (BotaoDeSelecao = '1') THEN
+					proximo_estado <= S9;
+				ELSE
+					proximo_estado <= S3;
+				END IF;
 		END CASE;
 	END PROCESS;
 END RTLControladora;
