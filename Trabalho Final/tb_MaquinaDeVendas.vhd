@@ -71,7 +71,7 @@ BEGIN
 
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(2, 5));
 
-	insertion <= '1', '0' AFTER 45 ns, '0' AFTER 100 ns;
+	insertion <= '1', '0' AFTER 100 ns, '0' AFTER 105 ns;
 	manutenancao <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
 	finish_all <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
 	selection <= '0', '1' AFTER 50 ns, '0' AFTER 100 ns;
