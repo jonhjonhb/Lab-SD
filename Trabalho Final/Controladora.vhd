@@ -96,7 +96,7 @@ BEGIN
 					proximo_estado <= S2;
 				ELSIF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
-				ELSIF (BotaoDeSelecao = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+				ELSE --(BotaoDeSelecao = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0')
 					proximo_estado <= S0;
 				END IF;
 			WHEN S1 =>
@@ -118,25 +118,25 @@ BEGIN
 				MANUT_STATE_clr <= '0';
 				IF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
-				ELSIF (ChavedeManutencao = '0') THEN
+				ELSE --(ChavedeManutencao = '0')
 					proximo_estado <= S3;
 				END IF;
 			WHEN S3 =>
 				-- Wait
 				REG_MONEY_ld <= '0';
 				SLC_PRODUCT_ld <= '0';
-				IF (SensorDeInsercao = '1' AND ChavedeManutencao = '0') THEN
+				IF (ChavedeManutencao = '1') THEN
+					proximo_estado <= S4;
+				ELSIF (SensorDeInsercao = '1' AND ChavedeManutencao = '0') THEN
 					proximo_estado <= S1;
 				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
-				ELSIF (FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
-					proximo_estado <= S3;
-				ELSIF (ChavedeManutencao = '1') THEN
-					proximo_estado <= S4;
 				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S6;
 				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S7;
+				ELSE --(FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0')
+					proximo_estado <= S3;
 				END IF;
 			WHEN S4 =>
 				-- Manutenção
@@ -148,22 +148,22 @@ BEGIN
 				SLC_PRODUCT_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
-				IF (ChavedeManutencao = '1' AND BotaoDeSelecao = '0' AND FinalizarEscolha = '0') THEN
-					proximo_estado <= S4;
+				IF (ChavedeManutencao = '0') THEN
+					proximo_estado <= S0;
 				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '1') THEN
 					proximo_estado <= S2;
-				ELSIF (ChavedeManutencao = '0') THEN
-					proximo_estado <= S0;
 				ELSIF (ChavedeManutencao = '1' AND FinalizarEscolha = '1' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S5;
+				ELSE --(ChavedeManutencao = '1' AND BotaoDeSelecao = '0' AND FinalizarEscolha = '0')
+					proximo_estado <= S4;
 				END IF;
 			WHEN S5 =>
 				-- Edita preço do input
 				MEM_wr <= '1';
-				IF (ProximoProduto = '0') THEN
-					proximo_estado <= S5;
-				ELSIF (ProximoProduto = '1') THEN
+				IF (ProximoProduto = '1') THEN
 					proximo_estado <= S4;
+				ELSE --(ProximoProduto = '0')
+					proximo_estado <= S5;
 				END IF;
 			WHEN S6 =>
 				-- Dispensa produto 
