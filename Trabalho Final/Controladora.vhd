@@ -192,7 +192,7 @@ BEGIN
 					proximo_estado <= S3;
 				END IF;
 			WHEN S10 =>
-				RELEASE_ld = '0';
+				RELEASE_ld <= '0';
 				proximo_estado <= S8;
 		END CASE;
 	END PROCESS;
