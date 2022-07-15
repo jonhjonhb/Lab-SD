@@ -74,22 +74,18 @@ BEGIN
 					STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 130 ns;
 
 	-- Transação 1 -- Dinheiro insuficiente 200~310ns -- Espera-se 10 reais de 'troco'
-	insertion <= '0', '1' AFTER 200 ns, '0' AFTER 230 ns;
+	insertion <= '1' AFTER 200 ns, '0' AFTER 230 ns;
 
-	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)),
-		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 200 ns,
-		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 230 ns;
+	money_value <= STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 200 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 230 ns;
 	
 	selection <= '1' AFTER 250 ns, '0' AFTER 270 ns;
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 250 ns;
 	finish_all <= '1' AFTER 290 ns, '0' AFTER 310 ns;
 
 	-- Transação 2 -- Dinheiro suficiente 400~510ns -- Espera-se 5 reais de troco
-	insertion <= '0', '1' AFTER 400 ns, '0' AFTER 430 ns;
+	insertion <= '1' AFTER 400 ns, '0' AFTER 430 ns;
 
-	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)),
-		STD_LOGIC_VECTOR(to_unsigned(25, 16)) AFTER 400 ns,
-		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 430 ns;
+	money_value <= STD_LOGIC_VECTOR(to_unsigned(25, 16)) AFTER 400 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 430 ns;
 	
 	selection <= '1' AFTER 450 ns, '0' AFTER 470 ns;
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 450 ns;
