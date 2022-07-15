@@ -33,7 +33,7 @@ ENTITY Controladora IS
 END ENTITY;
 
 ARCHITECTURE RTLControladora OF Controladora IS
-	TYPE state IS (S0, S1, S2, S3, S4, S5, S6, S7, S8, S9);
+	TYPE state IS (S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10);
 	SIGNAL estado_atual, proximo_estado : state;
 
 BEGIN
@@ -116,6 +116,7 @@ BEGIN
 				RTRN_REG_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
+				RTRN_REG_ld <= '0';
 				IF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
 				ELSE --(ChavedeManutencao = '0')
@@ -125,6 +126,7 @@ BEGIN
 				-- Wait
 				REG_MONEY_ld <= '0';
 				SLC_PRODUCT_ld <= '0';
+				RTRN_REG_ld <= '1';
 				IF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
 				ELSIF (SensorDeInsercao = '1' AND ChavedeManutencao = '0') THEN
@@ -148,6 +150,7 @@ BEGIN
 				SLC_PRODUCT_clr <= '0';
 				RELEASE_clr <= '0';
 				MANUT_STATE_clr <= '0';
+				RTRN_REG_ld <= '0';
 				IF (ChavedeManutencao = '0') THEN
 					proximo_estado <= S0;
 				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '1') THEN
@@ -167,11 +170,12 @@ BEGIN
 				END IF;
 			WHEN S6 =>
 				-- Dispensa produto 
-				RTRN_REG_ld <= '1';
+				RTRN_REG_ld <= '0';
 				RELEASE_ld <= '1';
-				proximo_estado <= S8;
+				proximo_estado <= S10;
 			WHEN S7 =>
 				-- Não dispensa produto
+				RTRN_REG_ld <= '0';
 				return_all <= '1';
 				proximo_estado <= S8;
 			WHEN S8 =>
@@ -187,6 +191,9 @@ BEGIN
 				ELSE
 					proximo_estado <= S3;
 				END IF;
+			WHEN S10 =>
+				RELEASE_ld = '0';
+				proximo_estado <= S8;
 		END CASE;
 	END PROCESS;
 END RTLControladora;
