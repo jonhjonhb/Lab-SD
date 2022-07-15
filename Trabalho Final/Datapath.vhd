@@ -25,7 +25,7 @@ ENTITY Datapath IS
 		return_value : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		dispense_product_id : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
 		REG_MONEY_lt_mem : OUT STD_LOGIC;
-		COIN_LOCK : OUT STD_LOGIC;
+		COIN_LOCK : OUT STD_LOGIC
 	);
 END Datapath;
 
@@ -47,8 +47,8 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 			NUM_OF_REGS : NATURAL := 32
 		);
 		PORT (
-			clk : IN STD_LOGIC
-			wr : IN STD_LOGIC
+			clk : IN STD_LOGIC;
+			wr : IN STD_LOGIC;
 			addr : IN STD_LOGIC_VECTOR (ADDR_LENGHT - 1 DOWNTO 0);
 			datain : IN STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0);
 			dataout : OUT STD_LOGIC_VECTOR (R_LENGHT - 1 DOWNTO 0)

@@ -27,7 +27,7 @@ ENTITY Controladora IS
 		MANUT_STATE_clr : OUT STD_LOGIC;
 		return_all : OUT STD_LOGIC;
 		dispense_money : OUT STD_LOGIC;
-		dispense_product : OUT STD_LOGIC;
+		dispense_product : OUT STD_LOGIC
 	);
 
 END ENTITY;
