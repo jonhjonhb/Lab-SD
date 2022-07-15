@@ -1,2 +1,6 @@
 .vscode/
 *.pdf
+.Trabalho\ Final/db/
+.Trabalho\ Final/incremental_db/
+.Trabalho\ Final/output_files/
+.Trabalho\ Final/simulations/
