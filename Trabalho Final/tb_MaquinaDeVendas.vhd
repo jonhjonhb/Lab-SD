@@ -77,7 +77,7 @@ BEGIN
 						STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 250 ns, STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 450 ns;
 
 	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(30, 16)) AFTER 50 ns, 
-						STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 150 ns;
+						STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 200 ns;
 
 	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 200 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 230 ns,
 					STD_LOGIC_VECTOR(to_unsigned(25, 16)) AFTER 400 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 430 ns;
