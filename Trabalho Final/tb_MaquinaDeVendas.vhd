@@ -73,7 +73,7 @@ BEGIN
 	insertion <= '0', '1' AFTER 200 ns, '0' AFTER 230 ns, '1' AFTER 400 ns, '0' AFTER 430 ns;
 
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(0, 5)), STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 25 ns, 
-						STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 90 ns, STD_LOGIC_VECTOR(to_unsigned(0, 5)) AFTER 110 ns,
+						STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 90 ns, STD_LOGIC_VECTOR(to_unsigned(0, 5)) AFTER 130 ns,
 						STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 250 ns, STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 450 ns;
 
 	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(30, 16)) AFTER 50 ns, 
