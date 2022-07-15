@@ -15,6 +15,6 @@ END ENTITY;
 ARCHITECTURE rtl OF mux2X1 IS
 BEGIN
 	WITH ChaveRetorno SELECT
-		ReturnValue <= CurrentChange WHEN '1',
+		ReturnValue <= CurrentChange WHEN '0',
 		CurrentMoney WHEN OTHERS;
 END rtl;
