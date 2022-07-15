@@ -19,13 +19,13 @@ BEGIN
 	BEGIN
 		IF (rising_edge(clk)) THEN
 			IF ((set = '0') AND (rst = '0')) THEN
-				tmp <= tmp;
+				tmp := tmp;
 			ELSIF ((set = '1') AND (rst = '1')) THEN
-				tmp <= not tmp;
+				tmp := not tmp;
 			ELSIF ((set = '0') AND (rst = '1')) THEN
-				tmp <= '0';
+				tmp := '0';
 			ELSE
-				tmp <= '1';
+				tmp := '1';
 			END IF;
 		END IF;
 		saida <= tmp;
