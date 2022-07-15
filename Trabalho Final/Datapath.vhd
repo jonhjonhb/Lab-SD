@@ -71,7 +71,7 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 			clk : IN STD_LOGIC;
 			rst : IN STD_LOGIC;
 			load : IN STD_LOGIC;
-			saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
+			saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0) := (others => '0')
 		);
 	END COMPONENT;
 
@@ -82,7 +82,7 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 			clk : IN STD_LOGIC;
 			rst : IN STD_LOGIC;
 			load : IN STD_LOGIC;
-			saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
+			saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0) := (others => '0')
 		);
 	END COMPONENT;
 
@@ -121,8 +121,8 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 	END COMPONENT;
 
 	-- Cabos genéricos caboA_B são cabos que ligam A a B. Cabos cabo_A_BCD ligam A a todos B, C e D.
-	SIGNAL caboF_A, caboA_FGJK, caboB_K, caboG_B, caboI_GJ : STD_LOGIC_VECTOR(15 DOWNTO 0);
-	SIGNAL caboD_HI, caboH_C : STD_LOGIC_VECTOR(4 DOWNTO 0);
+	SIGNAL caboF_A, caboA_FGJK, caboB_K, caboG_B, caboI_GJ : STD_LOGIC_VECTOR(15 DOWNTO 0)  := (others => '0');
+	SIGNAL caboD_HI, caboH_C : STD_LOGIC_VECTOR(4 DOWNTO 0)  := (others => '0');
 
 BEGIN
 	-- Chamada dos objetos
