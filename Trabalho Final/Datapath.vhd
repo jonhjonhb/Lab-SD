@@ -36,7 +36,8 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 			clk : IN STD_LOGIC;
 			set : IN STD_LOGIC;
 			rst : IN STD_LOGIC;
-			saida : OUT STD_LOGIC
+			saida : OUT STD_LOGIC;
+			saidaInv : OUT STD_LOGIC
 		);
 	END COMPONENT;
 
