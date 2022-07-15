@@ -181,6 +181,7 @@ BEGIN
 				proximo_estado <= S0;
 			WHEN S9 =>
 				--Tranca de inserção momentânea
+				REG_MONEY_ld <= '0';
 				IF (BotaoDeSelecao = '1') THEN
 					proximo_estado <= S9;
 				ELSE
