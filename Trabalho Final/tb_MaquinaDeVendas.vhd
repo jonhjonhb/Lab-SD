@@ -36,7 +36,7 @@ ARCHITECTURE testeMaquinaDeVendas OF tb_MaquinaDeVendas IS
 
 	SIGNAL product_selector, dispense_product_id : STD_LOGIC_VECTOR(4 DOWNTO 0);
 
-	SIGNAL lock_mechanism, dispense_money, dispense_product, insertion, manutenancao,
+	SIGNAL lock_mechanism, dispense_money, dispense_product, insertion, manutenance,
 	finish_all, selection, next_p, reset : STD_LOGIC := '0';
 	-- Clock period definitions
 	CONSTANT PERIOD : TIME := 10 ns;
@@ -46,7 +46,7 @@ ARCHITECTURE testeMaquinaDeVendas OF tb_MaquinaDeVendas IS
 BEGIN
 	instancia_MaquinaDeVendas : MaquinaDeVendas PORT MAP(
 		CLOCK_UNIVERSAL => CLK_50MHz, MONEY_VALUE => money_value, PRICE_INPUT => price_input,
-		PRODUCT_SELECTOR => product_selector, InsertionSensor => insertion, ManutenanceKey => manutenancao,
+		PRODUCT_SELECTOR => product_selector, InsertionSensor => insertion, ManutenanceKey => manutenance,
 		FinishProcess => finish_all, SelectionButton => selection, NextProduct => next_p, RESET => reset,
 		CURRENT_MONEY => current_money, PRODUCT_PRICE => product_price, MONEY_TO_RETURN => money_to_return,
 		DISPENSE_PRODUCT_ID => dispense_product_id, LOCK_MECHANISM => lock_mechanism, DISPENSE_MONEY => dispense_money,
@@ -63,19 +63,38 @@ BEGIN
 		END LOOP CLOCK_LOOP;
 	END PROCESS clock_manager;
 
-	money_value <= STD_LOGIC_VECTOR(to_unsigned(10, 16)),
-		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 50 ns,
-		STD_LOGIC_VECTOR(to_unsigned(40, 16)) AFTER 100 ns,
-		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 200 ns;
-	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16));
+	-- Edição dos preços dos produtos 1 e 2 -- 0~150ns
+	manutenance <= '0', '1' AFTER 10 ns, '0' AFTER 150 ns;
+	selection <= '0', '1' AFTER 25 ns, '0' AFTER 50 ns, '1' AFTER 90 ns, '0' AFTER 110 ns;
+	product_selector <= STD_LOGIC_VECTOR(to_unsigned(0, 5)), STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 25 ns, 
+						STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 90 ns, STD_LOGIC_VECTOR(to_unsigned(0, 5)) AFTER 110 ns;
+	finish_all <= '0', '1' AFTER 50 ns, '0' AFTER 70 ns;
+	next_p <= '0', '1' AFTER 70 ns, '0' AFTER 90 ns, '1' AFTER 110 ns, '0' AFTER 130 ns;
+	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(30, 16)) AFTER 50 ns, 
+					STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 130 ns;
 
-	product_selector <= STD_LOGIC_VECTOR(to_unsigned(2, 5));
+	-- Transação 1 -- Dinheiro insuficiente 200~310ns -- Espera-se 10 reais de 'troco'
+	insertion <= '0', '1' AFTER 200 ns, '0' AFTER 230 ns;
 
-	insertion <= '1', '0' AFTER 100 ns, '0' AFTER 150 ns;
-	manutenancao <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	finish_all <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	selection <= '0', '0' AFTER 50 ns, '1' AFTER 100 ns;
-	next_p <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
-	reset <= '0', '0' AFTER 50 ns, '0' AFTER 100 ns;
+	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)),
+		STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 200 ns,
+		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 230 ns;
+	
+	selection <= '1' AFTER 250 ns, '0' AFTER 270 ns;
+	product_selector <= STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 250 ns;
+	finish_all <= '1' AFTER 290 ns, '0' AFTER 310 ns;
+
+	-- Transação 2 -- Dinheiro suficiente 400~510ns -- Espera-se 5 reais de troco
+	insertion <= '0', '1' AFTER 400 ns, '0' AFTER 430 ns;
+
+	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)),
+		STD_LOGIC_VECTOR(to_unsigned(25, 16)) AFTER 400 ns,
+		STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 430 ns;
+	
+	selection <= '1' AFTER 450 ns, '0' AFTER 470 ns;
+	product_selector <= STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 450 ns;
+	finish_all <= '1' AFTER 490 ns, '0' AFTER 510 ns;
+
+	reset <= '0';
 
 END testeMaquinaDeVendas;
