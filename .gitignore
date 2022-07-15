@@ -5,6 +5,7 @@
 *.bak
 *.rpt
 *.txt
+*.qws
 Trabalho Final/db/
 Trabalho Final/incremental_db/
 Trabalho Final/output_files/
