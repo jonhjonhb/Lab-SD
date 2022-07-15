@@ -132,7 +132,7 @@ BEGIN
 	B_RTRN_REG : registrador16bits PORT MAP(clk => CLOCK, entrada => caboG_B, rst => RTRN_REG_clr, load => RTRN_REG_ld, saida => caboB_K);
 	C_RELEASE : registrador5bits PORT MAP(clk => CLOCK, entrada => caboH_C, rst => RELEASE_clr, load => RELEASE_ld, saida => dispense_product_id);
 	D_SLC_PRODUCT : registrador5bits PORT MAP(clk => CLOCK, entrada => SLC, rst => SLC_PRODUCT_clr, load => SLC_PRODUCT_ld, saida => caboD_HI);
-	E_MANUT_STATE : flip_flop_rs PORT MAP(clk => CLOCK, set => MANUT_STATE_set, rst => MANUT_STATE_clr, saida => COIN_LOCK);
+	E_MANUT_STATE : flip_flop_jk PORT MAP(clk => CLOCK, set => MANUT_STATE_set, rst => MANUT_STATE_clr, saida => COIN_LOCK);
 	F_SOMADOR : somador16bits PORT MAP(FirstNumber => Cvalue, SecondNumber => caboA_FGJK, OutputNumber => caboF_A);
 	G_SUBTRATOR : subtrator16bits PORT MAP(FirstNumber => caboA_FGJK, SecondNumber => caboI_GJ, OutputNumber => caboG_B);
 	H_INCREMENTADOR : incrementador5bits PORT MAP(Number => caboD_HI, OutputNumber => caboH_C);
