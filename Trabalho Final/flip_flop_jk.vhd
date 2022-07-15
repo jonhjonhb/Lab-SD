@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 -- FLIP FLOP RS
-ENTITY flip_flop_rs IS
+ENTITY flip_flop_jk IS
 	PORT (
 		clk : IN STD_LOGIC;
 		set : IN STD_LOGIC;
@@ -10,9 +10,9 @@ ENTITY flip_flop_rs IS
 		saida : OUT STD_LOGIC;
 		saidaInv : OUT STD_LOGIC
 	);
-END ENTITY flip_flop_rs;
+END ENTITY flip_flop_jk;
 
-ARCHITECTURE flip OF flip_flop_rs IS
+ARCHITECTURE flip OF flip_flop_jk IS
 BEGIN
 	PROCESS (clk) IS
 	variable tmp : std_logic;

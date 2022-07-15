@@ -31,7 +31,7 @@ END Datapath;
 
 ARCHITECTURE RTLDatapath OF Datapath IS
 	-- Componentes
-	COMPONENT flip_flop_rs IS
+	COMPONENT flip_flop_jk IS
 		PORT (
 			clk : IN STD_LOGIC;
 			set : IN STD_LOGIC;
