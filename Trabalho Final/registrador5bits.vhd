@@ -9,7 +9,7 @@ ENTITY registrador5bits IS
 		clk : IN STD_LOGIC;
 		rst : IN STD_LOGIC;
 		load : IN STD_LOGIC;
-		saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
+		saida : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0) := (others => '0')
 	);
 END ENTITY registrador5bits;
 
