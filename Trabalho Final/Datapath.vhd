@@ -89,9 +89,9 @@ ARCHITECTURE RTLDatapath OF Datapath IS
 	COMPONENT somador16bits IS
 		GENERIC (n : NATURAL := 16);
 		PORT (
-			FirstNumber : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 1);
-			SecondNumber : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 1);
-			OutputNumber : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 1)
+			FirstNumber : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+			SecondNumber : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+			OutputNumber : OUT STD_LOGIC_VECTOR(n - 1 DOWNTO 0)
 		);
 	END COMPONENT;
 

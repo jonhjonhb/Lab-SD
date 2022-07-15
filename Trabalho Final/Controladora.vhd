@@ -96,6 +96,8 @@ BEGIN
 					proximo_estado <= S2;
 				ELSIF (ChavedeManutencao = '1' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S4;
+				ELSIF (BotaoDeSelecao = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+					proximo_estado <= S0;
 				END IF;
 			WHEN S1 =>
 				-- Soma dinheiro inserido

@@ -20,7 +20,7 @@ BEGIN
 		IF (rst = '1') THEN
 			saida <= (OTHERS => '0');
 		ELSIF (rising_edge(clk) AND (load = '1')) THEN
-			saida <= entrada
+			saida <= entrada;
 			END IF;
 		END PROCESS;
 	END ARCHITECTURE beh;

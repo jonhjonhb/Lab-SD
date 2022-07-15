@@ -5,7 +5,7 @@ USE ieee.numeric_std.ALL;
 ENTITY incrementador5bits IS
 	GENERIC (
 		n : NATURAL := 5;
-		one : STD_LOGIC_VECTOR(n - 1 DOWNTO 0) := "00001"
+		one : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00001"
 	);
 	PORT (
 		Number : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
