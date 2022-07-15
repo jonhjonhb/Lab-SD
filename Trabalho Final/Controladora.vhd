@@ -171,16 +171,20 @@ BEGIN
 				END IF;
 			WHEN S6 =>
 				-- Dispensa produto 
-				RTRN_REG_ld <= '0';
+				RTRN_REG_ld <= '1';
 				RELEASE_ld <= '1';
 				proximo_estado <= S8;
 			WHEN S7 =>
 				-- Não dispensa produto
 				RTRN_REG_ld <= '0';
 				return_all <= '1';
+				RELEASE_clr <= '1';
 				proximo_estado <= S8;
 			WHEN S8 =>
 				--Dispensa Troco
+				RTRN_REG_ld <= '0';
+				return_all <= '0';
+				RELEASE_clr <= '0';
 				dispense_money <= '1';
 				dispense_product <= '1';
 				proximo_estado <= S0;
