@@ -67,9 +67,9 @@ BEGIN
 	-- 2: Tentativa de transação com dinheiro insuficiente, produto 1, retorna 10 reais -- 200~310ns
 	-- 3: Transação com dinheiro suficiente, produto 2, retorna 5 reais de troco --400~510ns
 	manutenance <= '0', '1' AFTER 10 ns, '0' AFTER 170 ns;
-	selection <= '0', '1' AFTER 25 ns, '0' AFTER 50 ns, '1' AFTER 90 ns, '0' AFTER 110 ns, '1' AFTER 250 ns, '0' AFTER 270 ns, '1' AFTER 450 ns, '0' AFTER 470 ns;
-	finish_all <= '0', '1' AFTER 50 ns, '0' AFTER 70 ns, '1' AFTER 290 ns, '0' AFTER 310 ns, '1' AFTER 490 ns, '0' AFTER 510 ns;
-	next_p <= '0', '1' AFTER 70 ns, '0' AFTER 90 ns, '1' AFTER 130 ns, '0' AFTER 150 ns;
+	selection <= '0', '1' AFTER 25 ns, '0' AFTER 50 ns, '1' AFTER 90 ns, '0' AFTER 130 ns, '1' AFTER 250 ns, '0' AFTER 270 ns, '1' AFTER 450 ns, '0' AFTER 470 ns;
+	finish_all <= '0', '1' AFTER 50 ns, '0' AFTER 70 ns, '1' AFTER 130 ns, '0' AFTER 150 ns, '1' AFTER 290 ns, '0' AFTER 310 ns, '1' AFTER 490 ns, '0' AFTER 510 ns;
+	next_p <= '0', '1' AFTER 70 ns, '0' AFTER 90 ns, '1' AFTER 150 ns, '0' AFTER 170 ns;
 	insertion <= '0', '1' AFTER 200 ns, '0' AFTER 230 ns, '1' AFTER 400 ns, '0' AFTER 430 ns;
 
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(0, 5)), STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 25 ns, 
