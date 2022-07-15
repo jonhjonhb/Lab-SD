@@ -63,13 +63,13 @@ BEGIN
 		END LOOP CLOCK_LOOP;
 	END PROCESS clock_manager;
 
-	-- 1: Edição dos preços dos produtos 1 e 2 -- 0~150ns
+	-- 1: Edição dos preços dos produtos 1 e 2 -- 0~190ns
 	-- 2: Tentativa de transação com dinheiro insuficiente, produto 1, retorna 10 reais -- 200~310ns
 	-- 3: Transação com dinheiro suficiente, produto 2, retorna 5 reais de troco --400~510ns
-	manutenance <= '0', '1' AFTER 10 ns, '0' AFTER 150 ns;
+	manutenance <= '0', '1' AFTER 10 ns, '0' AFTER 170 ns;
 	selection <= '0', '1' AFTER 25 ns, '0' AFTER 50 ns, '1' AFTER 90 ns, '0' AFTER 110 ns, '1' AFTER 250 ns, '0' AFTER 270 ns, '1' AFTER 450 ns, '0' AFTER 470 ns;
 	finish_all <= '0', '1' AFTER 50 ns, '0' AFTER 70 ns, '1' AFTER 290 ns, '0' AFTER 310 ns, '1' AFTER 490 ns, '0' AFTER 510 ns;
-	next_p <= '0', '1' AFTER 70 ns, '0' AFTER 90 ns, '1' AFTER 110 ns, '0' AFTER 130 ns;
+	next_p <= '0', '1' AFTER 70 ns, '0' AFTER 90 ns, '1' AFTER 130 ns, '0' AFTER 150 ns;
 	insertion <= '0', '1' AFTER 200 ns, '0' AFTER 230 ns, '1' AFTER 400 ns, '0' AFTER 430 ns;
 
 	product_selector <= STD_LOGIC_VECTOR(to_unsigned(0, 5)), STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 25 ns, 
@@ -77,7 +77,7 @@ BEGIN
 						STD_LOGIC_VECTOR(to_unsigned(1, 5)) AFTER 250 ns, STD_LOGIC_VECTOR(to_unsigned(2, 5)) AFTER 450 ns;
 
 	price_input <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(30, 16)) AFTER 50 ns, 
-						STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 130 ns;
+						STD_LOGIC_VECTOR(to_unsigned(20, 16)) AFTER 110 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 150 ns;
 
 	money_value <= STD_LOGIC_VECTOR(to_unsigned(0, 16)), STD_LOGIC_VECTOR(to_unsigned(10, 16)) AFTER 200 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 230 ns,
 					STD_LOGIC_VECTOR(to_unsigned(25, 16)) AFTER 400 ns, STD_LOGIC_VECTOR(to_unsigned(0, 16)) AFTER 430 ns;
