@@ -94,7 +94,7 @@ BEGIN
 					proximo_estado <= S1;
 				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
-				ELSIF (ChavedeManutencao = '1' AND SensorDeInsercao = '0') THEN
+				ELSIF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
 				ELSIF (BotaoDeSelecao = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S0;
@@ -125,18 +125,17 @@ BEGIN
 				-- Wait
 				REG_MONEY_ld <= '0';
 				SLC_PRODUCT_ld <= '0';
-
-				IF (SensorDeInsercao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0') THEN
+				IF (SensorDeInsercao = '1' AND ChavedeManutencao = '0') THEN
 					proximo_estado <= S1;
-				ELSIF (BotaoDeSelecao = '1' AND FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+				ELSIF (BotaoDeSelecao = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
 					proximo_estado <= S2;
-				ELSIF (FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+				ELSIF (FinalizarEscolha = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S3;
 				ELSIF (ChavedeManutencao = '1') THEN
 					proximo_estado <= S4;
-				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '0' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S6;
-				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0') THEN
+				ELSIF (FinalizarEscolha = '1' AND REG_MONEY_lt_mem = '1' AND ChavedeManutencao = '0' AND SensorDeInsercao = '0' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S7;
 				END IF;
 			WHEN S4 =>
@@ -155,7 +154,7 @@ BEGIN
 					proximo_estado <= S2;
 				ELSIF (ChavedeManutencao = '0') THEN
 					proximo_estado <= S0;
-				ELSIF (ChavedeManutencao = '1' AND FinalizarEscolha = '1') THEN
+				ELSIF (ChavedeManutencao = '1' AND FinalizarEscolha = '1' AND BotaoDeSelecao = '0') THEN
 					proximo_estado <= S5;
 				END IF;
 			WHEN S5 =>
