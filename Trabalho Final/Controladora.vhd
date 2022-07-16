@@ -177,7 +177,7 @@ BEGIN
 			WHEN S7 =>
 				-- Não dispensa produto
 				return_all <= '1';
-				--RELEASE_clr <= '1';
+				RELEASE_clr <= '1';
 				proximo_estado <= S8;
 			WHEN S8 =>
 				--Dispensa Troco
